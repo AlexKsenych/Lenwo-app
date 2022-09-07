@@ -1,13 +1,13 @@
 import './app.sass'
 import Header from '../header'
 import Flashcards from '../flashcards'
-import Template from '../template'
+import Profile from '../profile'
 
 const App = () => {
     return (
         <div className='app'>
             <Header />
-            <Template/>
+            <Profile/>
             {/* <Flashcards/> */}
         </div>
     )
