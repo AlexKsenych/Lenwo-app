@@ -6,7 +6,7 @@ const Profile = () => {
     return (
         <div className='profile'>
             <div className="profile__list">
-                <div className="profile__list__item">
+                <div className="profile__list__item item_active">
                     <div className='profile__list__item__descr'>
                         <div className='profile__list__item__descr__title'>Animals</div>
                         <div className='profile__list__item__descr__words'>Cat, Dog, Camel... + 24 words</div>
@@ -19,7 +19,7 @@ const Profile = () => {
                             <img className='profile__list__item__btns__btn__img' src={remove} alt="edit" />
                         </button>
                     </div>
-                    <div className="profile__list__item__templates">
+                    <div className="profile__list__item__templates templates_active">
                         <div className='profile__list__item__templates__template'>Classic Flashcards</div>
                         <div className='profile__list__item__templates__template'>Flashcards on time</div>
                         <div className='profile__list__item__templates__template'>Find out a definition</div>
