@@ -1,20 +1,36 @@
 import './flashcards.sass'
 import {useSearchParams} from 'react-router-dom'
+import { useState } from 'react'
 
 const Flashcards = ({data}) => {
-
+    const [isActive, setIsActive] = useState(false)
     const [searchParams] = useSearchParams()
     const searchId = +searchParams.get('id')
 
-    console.log(data.find(item => item.id === searchId))
+    const {title, words} = data.find(item => item.id === searchId)
+    const img = null
+
+    const onFlashcardClick = () => setIsActive(!isActive)
+
+    const activeClass = isActive ? 'active' : ''
 
     return (
         <main className='flashcards'>
-            <div className='flashcards__flashcard'>
-                <div className='flashcards__flashcard__word'>puppy</div>
-                <div className='flashcards__flashcard__btns'>
-                    <button className='flashcards__flashcard__btns__btn'>idk</button>
-                    <button className='flashcards__flashcard__btns__btn'>Yeah I Knew That</button>
+            <div onClick={onFlashcardClick} className='flashcards__flashcard'>
+                <div className={`flashcards__flashcard__inner ${activeClass}`}>
+                    <div className="flashcards__flashcard__inner__front">
+                        <div className='flashcards__flashcard__inner__front__word'>puppy</div>
+                            <div className='flashcards__flashcard__inner__front__btns'>
+                                <button className='flashcards__flashcard__inner__front__btns__btn'>idk</button>
+                                <button className='flashcards__flashcard__inner__front__btns__btn'>Yeah I Knew That</button>
+                            </div>
+                        </div>
+                    <div className="flashcards__flashcard__inner__back">
+                        {img ? <img src={img} alt="wordImage" className="flashcards__flashcard__inner__back__img" /> : null}
+                        <div className="flashcards__flashcard__inner__back__definition">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio quasi atque ab?
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -22,5 +38,3 @@ const Flashcards = ({data}) => {
 }
 
 export default Flashcards
-
-// <img className='flashcards__flashcard__img' src="" alt="flashcardImage" />
