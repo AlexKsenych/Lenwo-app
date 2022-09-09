@@ -1,4 +1,5 @@
 import './flashcards.sass'
+import arrow from '../../assets/img/arrow.png'
 import {useSearchParams} from 'react-router-dom'
 import { useState } from 'react'
 
@@ -16,6 +17,10 @@ const Flashcards = ({data}) => {
 
     return (
         <main className='flashcards'>
+            <div className='flashcards__title'>{title}</div>
+            <div className="flashcards__arrow">
+                <img src={arrow} alt="leftArrow" className="flashcards__arrow__left" />
+            </div>
             <div onClick={onFlashcardClick} className='flashcards__flashcard'>
                 <div className={`flashcards__flashcard__inner ${activeClass}`}>
                     <div className="flashcards__flashcard__inner__front">
@@ -32,6 +37,9 @@ const Flashcards = ({data}) => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="flashcards__arrow">
+                <img src={arrow} alt="rightArrow" className="flashcards__arrow__right" />
             </div>
         </main>
     )
