@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-const data = axios('data.json').then((res) => res)
+const Data = axios('data.json').then((res) => res.data)
 
-export default data
+export default Data

@@ -60,21 +60,26 @@
                 justify-content: space-around
                 align-items: center
                 background-color: #ff45008c
+                transition: 0.5s all
                 &__template
-                    width: 250px
+                    width: 360px
                     height: 100%
-                    margin-left: 110px
+                    padding-left: 110px
                     padding-top: 9px
                     border-right: 1px solid #fff
                     color: #fff
                     &:last-child
                         border: none
+                    &:hover
+                        background-color: #ffb093
     &__user
         background-color: gray
         grid-area: 'user'
 
 .item_active
     margin-bottom: 40px
+    border-bottom: 4px solid #ff45008c
+    height: 104px
 
 .templates_active
     bottom: -41px
