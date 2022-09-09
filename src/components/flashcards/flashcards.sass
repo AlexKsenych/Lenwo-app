@@ -3,7 +3,7 @@
     width: 100%
     height: calc(100vh - 50px)
     display: flex
-    justify-content: space-evenly
+    justify-content: center
     align-items: center
     color: #fff
     grid-area: 'main'
@@ -15,21 +15,6 @@
         top: 2%
         left: 50%
         transform: translate(-50%, -50%)
-    &__arrow
-        width: 50px
-        height: 50px
-        display: flex
-        justify-content: center
-        align-content: center
-        cursor: pointer
-        transition: 0.4s
-        &:hover
-            height: 70px
-        &__left, &__right
-            width: 45px
-            height: 45px
-        &__left
-            transform: rotate(0.5turn)
     &__flashcard
         background-color: transparent
         position: relative
@@ -100,3 +85,19 @@
 
 .active
     transform: rotateY(180deg)
+
+// &__arrow
+//         width: 50px
+//         height: 50px
+//         display: flex
+//         justify-content: center
+//         align-content: center
+//         cursor: pointer
+//         transition: 0.4s
+//         &:hover
+//             height: 70px
+//         &__left, &__right
+//             width: 45px
+//             height: 45px
+//         &__left
+//             transform: rotate(0.5turn)
