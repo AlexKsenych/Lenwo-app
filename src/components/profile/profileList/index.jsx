@@ -1,6 +1,7 @@
 import edit from '../../../assets/img/edit.png'
 import remove from '../../../assets/img/delete.png'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const ProfileList = ({data}) => {
     const [isActive, setIsActive] = useState(false)
@@ -34,10 +35,10 @@ const ProfileList = ({data}) => {
                     </button>
                 </div>
                 <div className={'profile__list__item__templates' + templatesActive}>
-                    <div className='profile__list__item__templates__template'>Classic Flashcards</div>
-                    <div className='profile__list__item__templates__template'>Flashcards on time</div>
-                    <div className='profile__list__item__templates__template'>Find out a definition</div>
-                    <div className='profile__list__item__templates__template'>Kahoot-like</div>
+                    <Link to={'/flashcards'} className='profile__list__item__templates__template'>Classic Flashcards</Link>
+                    <Link to={'/flashcardOnTime'} className='profile__list__item__templates__template'>Flashcards on time</Link>
+                    <Link to={'/findOut'} className='profile__list__item__templates__template'>Find out a definition</Link>
+                    <Link to={'/kahoot-like'} className='profile__list__item__templates__template'>Kahoot-like</Link>
                 </div>
             </div>
         )
