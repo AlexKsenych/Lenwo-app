@@ -22,6 +22,7 @@ const Flashcards = ({data}) => {
                 <img src={arrow} alt="leftArrow" className="flashcards__arrow__left" />
             </div>
             <div onClick={onFlashcardClick} className='flashcards__flashcard'>
+                <div className="flashcards__flashcard__count">{`${0} / ${words.length}`}</div>
                 <div className={`flashcards__flashcard__inner ${activeClass}`}>
                     <div className="flashcards__flashcard__inner__front">
                         <div className='flashcards__flashcard__inner__front__word'>puppy</div>
