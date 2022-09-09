@@ -17,6 +17,8 @@ const ProfileList = ({data}) => {
             setActiveId(id)
         }
 
+        const idParams = `?id=${id}`
+
         const itemActive = isActive && activeId === id ? " item_active" : '',
               templatesActive = isActive && activeId === id ? ' templates_active' : ''
 
@@ -35,10 +37,10 @@ const ProfileList = ({data}) => {
                     </button>
                 </div>
                 <div className={'profile__list__item__templates' + templatesActive}>
-                    <Link to={'/flashcards'} className='profile__list__item__templates__template'>Classic Flashcards</Link>
-                    <Link to={'/flashcardOnTime'} className='profile__list__item__templates__template'>Flashcards on time</Link>
-                    <Link to={'/findOut'} className='profile__list__item__templates__template'>Find out a definition</Link>
-                    <Link to={'/kahoot-like'} className='profile__list__item__templates__template'>Kahoot-like</Link>
+                    <Link to={`/flashcards${idParams}`} className='profile__list__item__templates__template'>Classic Flashcards</Link>
+                    <Link to={`/flashcardOnTime${idParams}`} className='profile__list__item__templates__template'>Flashcards on time</Link>
+                    <Link to={`/findOut${idParams}`} className='profile__list__item__templates__template'>Find out a definition</Link>
+                    <Link to={`/kahoot-like${idParams}`} className='profile__list__item__templates__template'>Kahoot-like</Link>
                 </div>
             </div>
         )

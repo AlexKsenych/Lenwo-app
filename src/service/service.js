@@ -1,5 +1,8 @@
 import axios from 'axios'
 
-const Data = axios('data.json').then((res) => res.data)
+const getData = async () => {
+    const res = await axios('data.json')
+    return await res.data
+}
 
-export default Data
+export default getData

@@ -1,6 +1,13 @@
 import './flashcards.sass'
+import {useSearchParams} from 'react-router-dom'
 
-const Flashcards = () => {
+const Flashcards = ({data}) => {
+
+    const [searchParams] = useSearchParams()
+    const searchId = +searchParams.get('id')
+
+    console.log(data.find(item => item.id === searchId))
+
     return (
         <main className='flashcards'>
             <div className='flashcards__flashcard'>

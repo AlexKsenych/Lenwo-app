@@ -4,13 +4,13 @@ import './app.sass'
 import Header from '../header'
 import Flashcards from '../flashcards'
 import Profile from '../profile'
-import Data from '../../service/service'
+import getData from '../../service/service'
 
 const App = () => {
     const [data, setData] = useState({})
 
     useEffect(() => {
-        Data.then(res => {
+        getData().then(res => {
             setData(res)
             return res
         })
@@ -19,10 +19,12 @@ const App = () => {
     return (
         <div className='app'>
             <Header />
-            <Routes>
-                <Route path="/" element={<Profile data={data.flashcards} />} />
-                <Route path="/flashcards" element={<Flashcards/>} />
-            </Routes>
+            {!data.flashcards ? <div>ddd</div> :
+                <Routes>
+                    <Route path="/" element={<Profile data={data.flashcards} />} />
+                    <Route path="/flashcards" element={<Flashcards data={data.flashcards}/>} />
+                </Routes>
+            }
         </div>
     )
 }

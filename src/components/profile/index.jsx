@@ -5,7 +5,7 @@ const Profile = ({data}) => {
 
     return (
         <div className='profile'>
-            {data ? <ProfileList data={data}/> : <div>Oops</div>}
+            <ProfileList data={data}/>
             <div className="profile__user"></div>
         </div>
     )
