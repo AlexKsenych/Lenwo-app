@@ -1,22 +1,38 @@
 import './flashcards.sass'
 // import arrow from '../../assets/img/arrow.png'
-import {useSearchParams} from 'react-router-dom'
-import { useState } from 'react'
+import Flashcard from './flashcard'
+import {useSearchParams, Link} from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+
+const findKnownWords = (unknownWords = [], arr) => {
+    if (unknownWords.length === 0) return arr
+
+    const newArr = arr.filter(item => {
+        if (unknownWords[0].id === item.id) return false
+        return true
+    })
+
+    return findKnownWords(unknownWords.slice(1, unknownWords.length), newArr)
+}
+
+const fromArrayToString = (arr) => arr.map(item => item.name).join(', ')
 
 const Flashcards = ({data}) => {
     const [currentNum, setCurrentNum] = useState(0)
     const [unknownWords, setUnknownWords] = useState([])
-    const [isActive, setIsActive] = useState(false)
+    const [isDone, setIsDone] = useState(false)
+
     const [searchParams] = useSearchParams()
     const searchId = searchParams.get('id')
 
-    const {title,  words} = data.find(item => item.id === searchId)
-    const {id, name, descr} = words[currentNum]
-    const img = null
+    const {title, words} = data.find(item => item.id === searchId)
 
-    const activeClass = isActive ? 'active' : ''
-
-    const onFlashcardClick = () => setIsActive(!isActive)
+    useEffect(() => {
+        if (currentNum === words.length) {
+            setIsDone(true)
+            setCurrentNum(0)
+        }
+    }, [currentNum, words])
 
     const onNextClick = (e, id) => {
         e.stopPropagation()
@@ -24,33 +40,55 @@ const Flashcards = ({data}) => {
         setCurrentNum(currentNum + 1)
     }
 
-    console.log(unknownWords)
+    const onRestart = () => {
+        setUnknownWords([])
+        setIsDone(false)
+    }
+
+    const {unknownWordsString, knownWordsString} = useMemo(() => {
+        const unknownWordsArray = unknownWords.map(id => words.find(item => item.id === id))
+
+        const unknownWordsString = fromArrayToString(unknownWordsArray)
+
+        const knownWordsString = fromArrayToString(findKnownWords(unknownWordsArray, words))
+
+        return {
+            unknownWordsString,
+            knownWordsString
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isDone])
+
+    const flashcardProps = {
+        onNextClick,
+        currentNum,
+        dataLength: words.length
+    }
+
+    const flashcardResult = (
+        <div className="flashcards__result">
+            <div className="flashcards__result__card">
+                <div className="flashcards__result__card__title">Words you should work at</div>
+                <div className="flashcards__result__card__words">{unknownWordsString}</div>
+                <button onClick={onRestart} className="flashcards__result__card__btn">Restart</button>
+            </div>
+            <div className="flashcards__result__card">
+                <div className="flashcards__result__card__title">Words that you know</div>
+                <div className="flashcards__result__card__words">{knownWordsString}</div>
+                <Link to={'/'} className="flashcards__result__card__btn">Back to the profile</Link>
+            </div>
+        </div>
+    )
 
     return (
         <main className='flashcards'>
             <div className='flashcards__title'>{title}</div>
-            <div onClick={onFlashcardClick} className='flashcards__flashcard'>
-                <div className="flashcards__flashcard__count">{`${currentNum + 1} / ${words.length}`}</div>
-                <div className={`flashcards__flashcard__inner ${activeClass}`}>
-                    <div className="flashcards__flashcard__inner__front">
-                        <div className='flashcards__flashcard__inner__front__word'>{name}</div>
-                            <div className='flashcards__flashcard__inner__front__btns'>
-                                <button onClick={(e) => onNextClick(e , id)} className='flashcards__flashcard__inner__front__btns__btn'>idk</button>
-                                <button onClick={onNextClick} className='flashcards__flashcard__inner__front__btns__btn'>Yeah I Knew That</button>
-                            </div>
-                        </div>
-                    <div className="flashcards__flashcard__inner__back">
-                        {img ? <img src={img} alt="wordImage" className="flashcards__flashcard__inner__back__img" /> : null}
-                        <div className="flashcards__flashcard__inner__back__definition">{descr}</div>
-                    </div>
-                </div>
-            </div>
+            {isDone ? flashcardResult : <Flashcard data={words[currentNum]} {...flashcardProps} />}
         </main>
     )
 }
 
 export default Flashcards
-
 
 /* <div onClick={() => onChangeNum(false)} className="flashcards__arrow">
     <img src={arrow} alt="leftArrow" className="flashcards__arrow__left" />

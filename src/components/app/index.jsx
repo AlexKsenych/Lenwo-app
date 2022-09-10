@@ -19,7 +19,7 @@ const App = () => {
     return (
         <div className='app'>
             <Header />
-            {!data.flashcards ? <div>ddd</div> :
+            {!data.flashcards ? <div>Oops</div> :
                 <Routes>
                     <Route path="/" element={<Profile data={data.flashcards} />} />
                     <Route path="/flashcards" element={<Flashcards data={data.flashcards}/>} />
