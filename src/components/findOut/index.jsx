@@ -1,5 +1,6 @@
 import './findOut.sass'
-import arrow from '../../assets/img/arrow.png'
+import arrowImg from '../../assets/img/arrow.png'
+import correctImg from '../../assets/img/correct.png'
 import { useState } from 'react';
 import UserResult from '../userResult';
 
@@ -86,8 +87,9 @@ const FindOut = ({words}) => {
                     <div className={isClassnameActive(isTrue !== false, "find-out__container__wrapper__correct-word")}>{state[currentNum].name}</div>
                     <div className={isClassnameActive(inputValue, 'find-out__container__wrapper__idk')}>idk</div>
                     <input onChange={(e) => onInputChange(e)} className={inputBooleanClass(isTrue)} type="text" value={inputValue} />
+                    <img className={isClassnameActive(!isTrue, 'find-out__container__wrapper__img')} src={correctImg} alt="correctImage" />
                     <button onClick={onNextClick} className={isClassnameActive(!inputValue, 'find-out__container__wrapper__next')}>
-                        <img src={arrow} alt="rightArrow" className="find-out__container__wrapper__next__img" />
+                        <img src={arrowImg} alt="rightArrow" className="find-out__container__wrapper__next__img" />
                     </button>
                     <div className={isClassnameActive(isTrue === null, 'find-out__container__wrapper__prev-word')}>{`Previously written: ${previousWord}`}</div>
                 </div>
