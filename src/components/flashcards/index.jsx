@@ -2,18 +2,12 @@ import './flashcards.sass'
 // import arrow from '../../assets/img/arrow.png'
 import Flashcard from './flashcard'
 import UserResult from '../userResult'
-import {useSearchParams} from 'react-router-dom'
 import { useEffect, useMemo, useState } from 'react'
 
-const Flashcards = ({data}) => {
+const Flashcards = ({words}) => {
     const [currentNum, setCurrentNum] = useState(0)
     const [unknownWords, setUnknownWords] = useState([])
     const [isDone, setIsDone] = useState(false)
-
-    const [searchParams] = useSearchParams()
-    const searchId = searchParams.get('id')
-
-    const {title, words} = data.find(item => item.id === searchId)
 
     useEffect(() => {
         if (currentNum === words.length) {
@@ -52,7 +46,6 @@ const Flashcards = ({data}) => {
         </>
     ) : (
         <main className='flashcards'>
-            <div className='flashcards__title'>{title}</div>
             <Flashcard data={words[currentNum]} {...flashcardProps} />
         </main>
     )
