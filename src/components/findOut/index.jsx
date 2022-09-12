@@ -75,6 +75,11 @@ const FindOut = ({words}) => {
         setState(shuffle(state))
     }
 
+    const onIDKClick = () => {
+        setUnknownWords([...unknownWords, state[currentNum]])
+        setCurrentNum(currentNum + 1)
+    }
+
     return !state.length ? <div>Oops</div> : currentNum === state.length ? <UserResult onRestart={onRestart} unknownWordsArray={unknownWords} data={state} /> : (
         <main className='find-out'>
             <div className="find-out__container">
@@ -85,7 +90,7 @@ const FindOut = ({words}) => {
                 </div>
                 <div className="find-out__container__wrapper">
                     <div className={isClassnameActive(isTrue !== false, "find-out__container__wrapper__correct-word")}>{state[currentNum].name}</div>
-                    <div className={isClassnameActive(inputValue, 'find-out__container__wrapper__idk')}>idk</div>
+                    <div onClick={onIDKClick} className={isClassnameActive(inputValue, 'find-out__container__wrapper__idk')}>idk</div>
                     <input onChange={(e) => onInputChange(e)} className={inputBooleanClass(isTrue)} type="text" value={inputValue} />
                     <img className={isClassnameActive(!isTrue, 'find-out__container__wrapper__img')} src={correctImg} alt="correctImage" />
                     <button onClick={onNextClick} className={isClassnameActive(!inputValue, 'find-out__container__wrapper__next')}>
