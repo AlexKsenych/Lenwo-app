@@ -3,6 +3,7 @@ import arrowImg from '../../assets/img/arrow.png'
 import correctImg from '../../assets/img/correct.png'
 import { useState } from 'react';
 import UserResult from '../userResult';
+import { isClassNameActive } from '../../utils/functions';
 
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex
@@ -17,10 +18,6 @@ function shuffle(array) {
     }
   
     return array;
-}
-
-const isClassnameActive = (condition, className) => {
-    return condition ? className : `${className} ${className}_active`
 }
 
 const checkStrings = (firstStr, secondStr) => {
@@ -89,14 +86,14 @@ const FindOut = ({words}) => {
                     <div className="find-out__container__definition__descr">{state[currentNum].descr}</div>
                 </div>
                 <div className="find-out__container__wrapper">
-                    <div className={isClassnameActive(isTrue !== false, "find-out__container__wrapper__correct-word")}>{state[currentNum].name}</div>
-                    <div onClick={onIDKClick} className={isClassnameActive(inputValue, 'find-out__container__wrapper__idk')}>idk</div>
+                    <div className={isClassNameActive(isTrue !== false, "find-out__container__wrapper__correct-word")}>{state[currentNum].name}</div>
+                    <div onClick={onIDKClick} className={isClassNameActive(inputValue, 'find-out__container__wrapper__idk')}>idk</div>
                     <input onChange={(e) => onInputChange(e)} className={inputBooleanClass(isTrue)} type="text" value={inputValue} />
-                    <img className={isClassnameActive(!isTrue, 'find-out__container__wrapper__img')} src={correctImg} alt="correctImage" />
-                    <button onClick={onNextClick} className={isClassnameActive(!inputValue, 'find-out__container__wrapper__next')}>
+                    <img className={isClassNameActive(!isTrue, 'find-out__container__wrapper__img')} src={correctImg} alt="correctImage" />
+                    <button onClick={onNextClick} className={isClassNameActive(!inputValue, 'find-out__container__wrapper__next')}>
                         <img src={arrowImg} alt="rightArrow" className="find-out__container__wrapper__next__img" />
                     </button>
-                    <div className={isClassnameActive(isTrue === null, 'find-out__container__wrapper__prev-word')}>{`Previously written: ${previousWord}`}</div>
+                    <div className={isClassNameActive(isTrue === null, 'find-out__container__wrapper__prev-word')}>{`Previously written: ${previousWord}`}</div>
                 </div>
             </div>
         </main>

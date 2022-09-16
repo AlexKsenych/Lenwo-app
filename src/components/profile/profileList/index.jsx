@@ -39,8 +39,8 @@ const ProfileList = ({data}) => {
                 <div className={'profile__list__item__templates' + templatesActive}>
                     <Link to={`/template/flashcards${idParams}`} className='profile__list__item__templates__template'>Classic Flashcards</Link>
                     <Link to={`/template/findOut${idParams}`} className='profile__list__item__templates__template'>Find out a word</Link>
-                    <Link to={`/template/flashcardOnTime${idParams}`} className='profile__list__item__templates__template'>Flashcards on time</Link>
                     <Link to={`/template/kahoot-like${idParams}`} className='profile__list__item__templates__template'>Kahoot-like</Link>
+                    <Link to={`/template/flashcardOnTime${idParams}`} className='profile__list__item__templates__template'>Flashcards on time</Link>
                 </div>
             </div>
         )
