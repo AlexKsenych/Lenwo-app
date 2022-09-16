@@ -37,13 +37,11 @@ const Flashcards = ({words}) => {
     }
 
     return isDone ? (
-        <>
-            <UserResult 
-            onRestart={onRestart} 
-            unknownWordsArray={unknownWordsArray} 
-            data={words} 
-            />
-        </>
+        <UserResult 
+        onRestart={onRestart} 
+        unknownWordsArray={unknownWordsArray} 
+        data={words} 
+        />
     ) : (
         <main className='flashcards'>
             <Flashcard data={words[currentNum]} {...flashcardProps} />

@@ -4,21 +4,7 @@ import correctImg from '../../assets/img/correct.png'
 import { useState } from 'react';
 import UserResult from '../userResult';
 import { isClassNameActive } from '../../utils/functions';
-
-function shuffle(array) {
-    let currentIndex = array.length,  randomIndex
-
-    while (currentIndex !== 0) {
-
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--;
-
-      [array[currentIndex], array[randomIndex]] = [
-       array[randomIndex],  array[currentIndex]]
-    }
-  
-    return array;
-}
+import { shuffleArray } from '../../utils/functions';
 
 const checkStrings = (firstStr, secondStr) => {
     const pureFirstStr = firstStr.trim().toLowerCase()
@@ -69,7 +55,7 @@ const FindOut = ({words}) => {
     const onRestart = () => {
         setUnknownWords([])
         setCurrentNum(0)
-        setState(shuffle(state))
+        setState(shuffleArray(state))
     }
 
     const onIDKClick = () => {
