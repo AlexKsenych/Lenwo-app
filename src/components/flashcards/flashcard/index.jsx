@@ -3,7 +3,7 @@ import { isClassNameActive } from '../../../utils/functions'
 
 const Flashcard = ({ data = {}, onNextClick, currentNum, dataLength }) => {
     const [isActiveClass, setIsActiveClass] = useState(false)
-    const { id, name, descr } = data
+    const { name, descr } = data
     const img = null
 
     const onFlashcardClick = () => setIsActiveClass(!isActiveClass)
@@ -25,7 +25,7 @@ const Flashcard = ({ data = {}, onNextClick, currentNum, dataLength }) => {
                     </div>
                     <div className='flashcards__flashcard__inner__front__btns'>
                         <button
-                            onClick={(e) => onNextClick(e, id)}
+                            onClick={(e) => onNextClick(e, data)}
                             className='flashcards__flashcard__inner__front__btns__btn'
                         >
                             idk

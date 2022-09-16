@@ -1,7 +1,7 @@
 import './findOut.sass'
 import arrowImg from '../../assets/img/arrow.png'
 import correctImg from '../../assets/img/correct.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UserResult from '../userResult'
 import { isClassNameActive } from '../../utils/functions'
 import { shuffleArray } from '../../utils/functions'
@@ -26,11 +26,16 @@ const FindOut = ({ words }) => {
     const [previousWord, setPreviousWord] = useState('')
     const [unknownWords, setUnknownWords] = useState([])
     const [isTrue, setIsTrue] = useState(null)
-    const [state, setState] = useState(words)
+    const [state, setState] = useState([])
     const [inputValue, setInputValue] = useState('')
     const [currentNum, setCurrentNum] = useState(0)
 
     const img = null
+
+    useEffect(() => {
+        setState([...words])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const onNextClick = () => {
         if (checkStrings(inputValue, state[currentNum].name)) {
@@ -66,9 +71,9 @@ const FindOut = ({ words }) => {
         setCurrentNum(currentNum + 1)
     }
 
-    return !state.length ? (
-        <div>Oops</div>
-    ) : currentNum === state.length ? (
+    const isDone = currentNum === state.length
+
+    return isDone ? (
         <UserResult
             onRestart={onRestart}
             unknownWordsArray={unknownWords}

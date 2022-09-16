@@ -23,10 +23,12 @@ const App = () => {
         setIsLoading(false)
     }, [])
 
+    const loadingCondition = isLoading || Object.keys(data).length === 0
+
     return (
         <div className='app'>
             <Header />
-            {isLoading || Object.keys(data).length === 0 ? (
+            {loadingCondition ? (
                 <Loading />
             ) : (
                 <Routes>
