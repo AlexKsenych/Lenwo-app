@@ -4,7 +4,7 @@ import Flashcard from './flashcard'
 import UserResult from '../userResult'
 import { useEffect, useMemo, useState } from 'react'
 
-const Flashcards = ({words}) => {
+const Flashcards = ({ words }) => {
     const [currentNum, setCurrentNum] = useState(0)
     const [unknownWords, setUnknownWords] = useState([])
     const [isDone, setIsDone] = useState(false)
@@ -26,21 +26,23 @@ const Flashcards = ({words}) => {
         setUnknownWords([])
         setIsDone(false)
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const unknownWordsArray = useMemo(() => unknownWords.map(id => words.find(item => item.id === id)), [isDone])
+    const unknownWordsArray = useMemo(
+        () => unknownWords.map((id) => words.find((item) => item.id === id)),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [isDone]
+    )
 
     const flashcardProps = {
         onNextClick,
         currentNum,
-        dataLength: words.length
+        dataLength: words.length,
     }
 
     return isDone ? (
-        <UserResult 
-        onRestart={onRestart} 
-        unknownWordsArray={unknownWordsArray} 
-        data={words} 
+        <UserResult
+            onRestart={onRestart}
+            unknownWordsArray={unknownWordsArray}
+            data={words}
         />
     ) : (
         <main className='flashcards'>

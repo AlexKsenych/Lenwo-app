@@ -16,7 +16,7 @@ const App = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        getData().then(res => {
+        getData().then((res) => {
             setData(res)
             return res
         })
@@ -26,14 +26,43 @@ const App = () => {
     return (
         <div className='app'>
             <Header />
-            {isLoading || Object.keys(data).length === 0 ? <Loading/> :
+            {isLoading || Object.keys(data).length === 0 ? (
+                <Loading />
+            ) : (
                 <Routes>
-                    <Route path="/" element={<Profile data={data.flashcards} />} />
-                    <Route path="/template/flashcards" element={<TemplateHOC Component={Flashcards} data={data.flashcards}/>} />
-                    <Route path="/template/findOut" element={<TemplateHOC Component={FindOut} data={data.flashcards}/>} />
-                    <Route path="/template/kahoot-like" element={<TemplateHOC Component={KahootLike} data={data.flashcards}/>} />
+                    <Route
+                        path='/'
+                        element={<Profile data={data.flashcards} />}
+                    />
+                    <Route
+                        path='/template/flashcards'
+                        element={
+                            <TemplateHOC
+                                Component={Flashcards}
+                                data={data.flashcards}
+                            />
+                        }
+                    />
+                    <Route
+                        path='/template/findOut'
+                        element={
+                            <TemplateHOC
+                                Component={FindOut}
+                                data={data.flashcards}
+                            />
+                        }
+                    />
+                    <Route
+                        path='/template/kahoot-like'
+                        element={
+                            <TemplateHOC
+                                Component={KahootLike}
+                                data={data.flashcards}
+                            />
+                        }
+                    />
                 </Routes>
-            }
+            )}
         </div>
     )
 }
