@@ -14,8 +14,27 @@ function shuffleArray(array) {
     return array
 }
 
+const changeClassNameByCondition = (
+    e,
+    className,
+    condition,
+    timeOut = 1200
+) => {
+    if (condition === null) return
+
+    const target = e.currentTarget
+
+    target.className = condition
+        ? `${className} ${className}_true`
+        : `${className} ${className}_false`
+
+    setTimeout(() => {
+        target.className = className
+    }, timeOut)
+}
+
 const isClassNameActive = (condition, className) => {
     return condition ? className : `${className} ${className}_active`
 }
 
-export { shuffleArray, isClassNameActive }
+export { shuffleArray, isClassNameActive, changeClassNameByCondition }
