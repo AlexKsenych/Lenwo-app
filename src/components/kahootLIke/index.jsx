@@ -7,7 +7,7 @@ import './kahootLike.sass'
 const createRandomNumbers = (arrLength, currNum) => {
     const arr = []
 
-    for (let i = 1; i < arrLength; i++) {
+    for (let i = 0; i < arrLength; i++) {
         arr.push(i)
     }
 
@@ -68,9 +68,6 @@ const KahootLike = ({ words }) => {
         setUnknownWords([])
         setCurrentNum(0)
     }
-
-    console.log(state)
-    console.log(wordNums)
 
     const loadingCondition = state.length === 0 || wordNums.length === 0
 
