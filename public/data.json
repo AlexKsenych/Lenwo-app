@@ -52,5 +52,10 @@
                 }
             ]
         }
-    ]
+    ],
+    "userInfo": {
+        "name": "Mark II",
+        "img": "null",
+        "dayStreak": "2"
+    }
 }

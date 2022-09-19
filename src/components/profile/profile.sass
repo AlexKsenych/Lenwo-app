@@ -74,8 +74,37 @@
                     &:hover
                         background-color: #ffb093
     &__user
-        background-color: gray
         grid-area: 'user'
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        align-items: center
+        color: #000
+        &__img
+            width: 160px
+            height: 160px
+            object-fit: fill
+            &_active
+                border-radius: 50%
+        &__name
+            font-size: 27px
+        &__descr
+            height: 40px
+            display: flex
+            justify-content: space-between
+            align-items: center
+            background-color: #eaeaea
+            border-radius: 7px
+            &__title
+                padding-left: 10px
+                width: 200px
+                height: 20px
+                font-size: 18px
+            &__value
+                padding-right: 10px
+                width: 200px
+                height: 20px
+                text-align: right
 
 .item_active
     margin-bottom: 40px

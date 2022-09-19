@@ -34,7 +34,12 @@ const App = () => {
                 <Routes>
                     <Route
                         path='/'
-                        element={<Profile data={data.flashcards} />}
+                        element={
+                            <Profile
+                                data={data.flashcards}
+                                userData={data.userInfo}
+                            />
+                        }
                     />
                     <Route
                         path='/template/flashcards'
