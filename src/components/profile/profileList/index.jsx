@@ -78,12 +78,6 @@ const ProfileList = ({ data }) => {
                     >
                         Kahoot-like
                     </Link>
-                    <Link
-                        to={`/template/flashcardOnTime${idParams}`}
-                        className='profile__list__item__templates__template'
-                    >
-                        Flashcards on time
-                    </Link>
                 </div>
             </div>
         )
