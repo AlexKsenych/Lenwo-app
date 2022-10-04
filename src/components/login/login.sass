@@ -1,0 +1,82 @@
+.login
+    width: 100%
+    height: calc(100vh - 50px)
+    position: relative
+    display: flex
+    justify-content: center
+    align-content: center
+    &__form
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 400px
+        height: 500px
+        background-color: #ff45008c
+        border-radius: 8px
+        padding: 0 10px 30px 10px
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        align-items: center
+        &__links
+            width: 350px
+            display: flex
+            justify-content: space-around
+            align-items: center
+            &__login
+                display: flex
+                justify-content: center
+                align-items: center
+                width: 150px
+                height: 35px
+                background: #fff
+                border-radius: 0 0 11px 11px
+                border: none
+                color: #000
+                font-size: 16px
+            &__registration
+                display: flex
+                justify-content: center
+                align-items: center
+                width: 150px
+                height: 35px
+                background: none
+                border: 2px solid #fff
+                border-top: 0
+                border-radius: 0 0 11px 11px
+                color: #fff
+                text-decoration: none
+                font-size: 16px
+                cursor: pointer
+                transition: 0.4s
+                &:hover
+                    border: none
+                    background-color: #fff
+                    color: #000
+        &__input
+            width: 300px
+            height: 40px
+            background-color: #fff
+            border-radius: 8px
+            border: none
+            outline: none
+            padding: 5px
+            color: #000
+        &__btn
+            width: 200px
+            height: 40px
+            border-radius: 11px
+            border: 2px solid #fff
+            background: none
+            color: #fff
+            pointer-events: none
+            transition: 0.3s
+            &_active
+                cursor: pointer
+                pointer-events: auto
+                border: none
+                background-color: #fff
+                color: #000
+                &:hover
+                    box-shadow: 0px 1px 8px #fff

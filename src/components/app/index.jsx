@@ -9,6 +9,8 @@ import KahootLike from '../kahootLIke'
 import Profile from '../profile'
 import getData from '../../service/service'
 import TemplateHOC from './templateHOC'
+import Login from '../login'
+import Registration from '../registration'
 
 const App = () => {
     const [data, setData] = useState({})
@@ -41,6 +43,8 @@ const App = () => {
                             />
                         }
                     />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/registration' element={<Registration />} />
                     <Route
                         path='/template/flashcards'
                         element={
