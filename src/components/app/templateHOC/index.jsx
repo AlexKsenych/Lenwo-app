@@ -4,7 +4,7 @@ const TemplateHOC = ({ Component, data }) => {
     const [searchParams] = useSearchParams()
     const searchId = searchParams.get('id')
 
-    const { words, title } = data.find((item) => item.id === searchId)
+    const { words, title } = data.find((item) => item._id === searchId)
 
     return (
         <>

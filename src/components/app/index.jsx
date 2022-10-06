@@ -1,75 +1,71 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './app.sass'
-import Loading from '../../utils/loading'
 import Header from '../header'
+import Auth from '../auth'
 import Flashcards from '../flashcards'
 import FindOut from '../findOut'
 import KahootLike from '../kahootLIke'
 import Profile from '../profile'
-import getData from '../../service/service'
+import { getList, getAuthMe } from '../../service/service'
 import TemplateHOC from './templateHOC'
-import Login from '../login'
-import Registration from '../registration'
 
 const App = () => {
-    const [data, setData] = useState({})
-    const [isLoading, setIsLoading] = useState(false)
+    const [isAuth, setIsAuth] = useState(null)
+    const [state, setState] = useState({})
+    const [userData, setUserData] = useState({})
 
     useEffect(() => {
-        setIsLoading(true)
-        getData().then((res) => {
-            setData(res)
-            return res
-        })
-        setIsLoading(false)
-    }, [])
+        getAuthMe()
+            .then((res) => {
+                setIsAuth(true)
+                setUserData(res)
+            })
+            .catch((err) => {
+                if (!isAuth) {
+                    console.log(err)
+                    setIsAuth(false)
+                    console.log('Authorization is required')
+                }
+            })
+    }, [isAuth])
 
-    const loadingCondition = isLoading || Object.keys(data).length === 0
+    useEffect(() => {
+        if (!isAuth) return
+        getList().then((res) => {
+            setState(res)
+        })
+    }, [isAuth])
+
+    const authCondition = isAuth !== null && !isAuth
 
     return (
         <div className='app'>
-            <Header />
-            {loadingCondition ? (
-                <Loading />
+            <Header auth={authCondition} />
+            {authCondition ? (
+                <Auth setIsAuth={setIsAuth} />
             ) : (
                 <Routes>
                     <Route
                         path='/'
-                        element={
-                            <Profile
-                                data={data.flashcards}
-                                userData={data.userInfo}
-                            />
-                        }
+                        element={<Profile data={state} userData={userData} />}
                     />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/registration' element={<Registration />} />
                     <Route
                         path='/template/flashcards'
                         element={
-                            <TemplateHOC
-                                Component={Flashcards}
-                                data={data.flashcards}
-                            />
+                            <TemplateHOC Component={Flashcards} data={state} />
                         }
                     />
                     <Route
                         path='/template/findOut'
                         element={
-                            <TemplateHOC
-                                Component={FindOut}
-                                data={data.flashcards}
-                            />
+                            <TemplateHOC Component={FindOut} data={state} />
                         }
                     />
                     <Route
                         path='/template/kahoot-like'
                         element={
-                            <TemplateHOC
-                                Component={KahootLike}
-                                data={data.flashcards}
-                            />
+                            <TemplateHOC Component={KahootLike} data={state} />
                         }
                     />
                 </Routes>

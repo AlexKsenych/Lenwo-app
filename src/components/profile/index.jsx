@@ -1,18 +1,23 @@
 import './profile.sass'
 import ProfileList from './profileList'
 import ProfileUserInfo from './profileUserInfo'
+import Loading from '../../utils/loading'
 
 const Profile = ({ data, userData }) => {
-    const profileUserInfoProps = {
-        data: userData,
-        setsLength: data.length,
-    }
+    const loadingCondition =
+        Object.keys(data).length === 0 || Object.keys(userData).length === 0
 
     return (
-        <div className='profile'>
-            <ProfileList data={data} />
-            <ProfileUserInfo {...profileUserInfoProps} />
-        </div>
+        <>
+            {loadingCondition ? (
+                <Loading />
+            ) : (
+                <div className='profile'>
+                    <ProfileList data={data} />
+                    <ProfileUserInfo data={userData} setsLength={data.length} />
+                </div>
+            )}
+        </>
     )
 }
 

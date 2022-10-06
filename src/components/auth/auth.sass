@@ -1,4 +1,13 @@
-.registration
+@mixin link()
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 150px
+    height: 35px
+    border-radius: 0 0 11px 11px
+    font-size: 16px
+
+.auth
     width: 100%
     height: calc(100vh - 50px)
     position: relative
@@ -24,36 +33,24 @@
             display: flex
             justify-content: space-around
             align-items: center
-            &__login
-                display: flex
-                justify-content: center
-                align-items: center
-                width: 150px
-                height: 35px
-                background: none
-                border: 2px solid #fff
-                border-top: 0
-                border-radius: 0 0 11px 11px
-                color: #fff
-                text-decoration: none
-                font-size: 16px
-                cursor: pointer
-                transition: 0.4s
-                &:hover
-                    border: none
-                    background-color: #fff
-                    color: #000
-            &__registration
-                display: flex
-                justify-content: center
-                align-items: center
-                width: 150px
-                height: 35px
+            &__link
+                @include link
                 background: #fff
-                border-radius: 0 0 11px 11px
                 border: none
                 color: #000
-                font-size: 16px
+                pointer-events: none
+                &_active
+                    background: none
+                    border: 2px solid #fff
+                    border-top: 0
+                    color: #fff
+                    pointer-events: auto
+                    cursor: pointer
+                    transition: 0.4s
+                    &:hover
+                        border: none
+                        background-color: #fff
+                        color: #000
         &__input
             width: 300px
             height: 40px
@@ -63,6 +60,17 @@
             outline: none
             padding: 5px
             color: #000
+        &__error
+            display: none
+            width: 250px
+            height: 22px
+            text-align: center
+            color: #fff
+            border: 2px solid #fff
+            border-radius: 11px
+            box-shadow: 0 2px 12px #ff0000
+            &_active
+                display: block
         &__btn
             width: 200px
             height: 40px
