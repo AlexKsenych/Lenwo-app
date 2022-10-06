@@ -19,6 +19,11 @@ export const postLogin = async (params) => {
     return await res.data
 }
 
+export const postRegister = async (params) => {
+    const res = await instance.post('/auth/register', params)
+    return await res.data
+}
+
 export const getAuthMe = async () => {
     const res = await instance('/auth/me', {
         headers: {

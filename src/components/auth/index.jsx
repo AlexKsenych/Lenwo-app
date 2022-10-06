@@ -1,5 +1,5 @@
 import './auth.sass'
-import { postLogin } from '../../service/service'
+import { postLogin, postRegister } from '../../service/service'
 import { useState } from 'react'
 import { isClassNameActive } from '../../utils/functions'
 
@@ -10,28 +10,45 @@ const onChange = (e, setData) => {
 
 const Auth = ({ setIsAuth }) => {
     const [isLogin, setIsLogin] = useState(true)
-    const [userName, setUserName] = useState('')
+    const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('google@gmail.com')
     const [password, setPassword] = useState('12345')
     const [isError, setIsError] = useState(false)
 
     const onFormSubmit = (e) => {
         e.preventDefault()
-        postLogin({
-            email,
-            password,
-        })
-            .then((res) => {
-                window.localStorage.setItem('token', res.token)
-                setIsAuth(true)
+        if (isLogin) {
+            postLogin({
+                email,
+                password,
             })
-            .catch((err) => {
-                console.log('Auth error :', err)
-                setIsError(true)
+                .then((res) => {
+                    window.localStorage.setItem('token', res.token)
+                    setIsAuth(true)
+                })
+                .catch((err) => {
+                    console.log('Auth error :', err)
+                    setIsError(true)
+                })
+        } else {
+            postRegister({
+                fullName,
+                email,
+                password,
             })
+                .then((res) => {
+                    console.log(res)
+                    window.localStorage.setItem('token', res.token)
+                    setIsAuth(true)
+                })
+                .catch((err) => {
+                    console.log('Auth error :', err)
+                    setIsError(true)
+                })
+        }
     }
 
-    const onUserNameChange = (e) => onChange(e, setUserName)
+    const onFullNameChange = (e) => onChange(e, setFullName)
 
     const onEmailChange = (e) => onChange(e, setEmail)
 
@@ -43,7 +60,7 @@ const Auth = ({ setIsAuth }) => {
 
     const submitCondition = isLogin
         ? !email.trim() || !password.trim()
-        : !userName.trim() || !email.trim() || !password.trim()
+        : !fullName.trim() || !email.trim() || !password.trim()
 
     return (
         <div className='auth'>
@@ -67,16 +84,16 @@ const Auth = ({ setIsAuth }) => {
                             'auth__form__links__link'
                         )}
                     >
-                        Registration
+                        Sign Up
                     </button>
                 </div>
                 {isLogin ? null : (
                     <input
                         className='auth__form__input'
                         type='text'
-                        placeholder='User Name'
-                        value={userName}
-                        onChange={onUserNameChange}
+                        placeholder='Full Name'
+                        value={fullName}
+                        onChange={onFullNameChange}
                     />
                 )}
                 <input
@@ -105,7 +122,7 @@ const Auth = ({ setIsAuth }) => {
                         'auth__form__btn'
                     )}
                 >
-                    Login
+                    {isLogin ? 'Login' : 'Sign Up'}
                 </button>
             </form>
         </div>
