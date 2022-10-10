@@ -7,6 +7,7 @@ import Flashcards from '../flashcards'
 import FindOut from '../findOut'
 import KahootLike from '../kahootLIke'
 import Profile from '../profile'
+import CreateWordSet from '../createWordSet'
 import { getMe } from '../../service/service'
 import TemplateHOC from './templateHOC'
 
@@ -47,6 +48,10 @@ const App = () => {
                                 userData={userData}
                             />
                         }
+                    />
+                    <Route
+                        path='/create-word-set'
+                        element={<CreateWordSet />}
                     />
                     <Route
                         path='/template/flashcards'

@@ -1,11 +1,14 @@
 import edit from '../../../assets/img/edit.png'
 import remove from '../../../assets/img/delete.png'
+import plus from '../../../assets/img/plus.png'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const ProfileList = ({ data }) => {
     const [isActive, setIsActive] = useState(false)
     const [activeId, setActiveId] = useState()
+
+    const navigate = useNavigate()
 
     const listItems = data.map((item) => {
         const { title, id, words } = item
@@ -81,7 +84,23 @@ const ProfileList = ({ data }) => {
         )
     })
 
-    return <div className='profile__list'>{listItems}</div>
+    const onAddItem = () => {
+        return navigate('/create-word-set')
+    }
+
+    return (
+        <div className='profile__list'>
+            {listItems}
+            <div className='profile__list__item'>
+                <img
+                    onClick={onAddItem}
+                    className='profile__list__item__plus'
+                    src={plus}
+                    alt='Add item'
+                />
+            </div>
+        </div>
+    )
 }
 
 export default ProfileList
