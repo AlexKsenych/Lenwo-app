@@ -9,11 +9,6 @@ const instance = axios.create({
     },
 })
 
-export const getList = async () => {
-    const res = await instance('/wordSets')
-    return await res.data
-}
-
 export const postLogin = async (params) => {
     const res = await instance.post('/auth/login', params)
     return await res.data
@@ -24,11 +19,11 @@ export const postRegister = async (params) => {
     return await res.data
 }
 
-export const getAuthMe = async () => {
+export const getMe = async () => {
     const res = await instance('/auth/me', {
         headers: {
             Authorization: window.localStorage.getItem('token'),
         },
     })
-    return await res.data
+    return await res.data.userData
 }

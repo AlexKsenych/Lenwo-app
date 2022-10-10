@@ -3,7 +3,7 @@ import imgNotFound from '../../../assets/img/image-not-found.png'
 import { isClassNameActive } from '../../../utils/functions'
 
 const ProfileUserInfo = ({ data, setsLength }) => {
-    const { fullName, img, dayStreak } = data.userData
+    const { fullName, img, dayStreak } = data
 
     return (
         <div className='profile__user'>

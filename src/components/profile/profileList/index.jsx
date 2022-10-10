@@ -8,24 +8,24 @@ const ProfileList = ({ data }) => {
     const [activeId, setActiveId] = useState()
 
     const listItems = data.map((item) => {
-        const { title, _id, words } = item
+        const { title, id, words } = item
 
         const descrWords = `${words[0].name}, ${words[1].name}, ${words[2].name}... / ${words.length} words in total`
 
         const onItemClick = () => {
             setIsActive(!isActive)
-            setActiveId(_id)
+            setActiveId(id)
         }
 
-        const idParams = `?id=${_id}`
+        const idParams = `?id=${id}`
 
-        const itemActive = isActive && activeId === _id ? ' item_active' : '',
+        const itemActive = isActive && activeId === id ? ' item_active' : '',
             templatesActive =
-                isActive && activeId === _id ? ' templates_active' : ''
+                isActive && activeId === id ? ' templates_active' : ''
 
         return (
             <div
-                key={_id}
+                key={id}
                 onClick={onItemClick}
                 className={'profile__list__item' + itemActive}
             >

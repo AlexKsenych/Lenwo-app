@@ -3,9 +3,8 @@ import ProfileList from './profileList'
 import ProfileUserInfo from './profileUserInfo'
 import Loading from '../../utils/loading'
 
-const Profile = ({ data, userData }) => {
-    const loadingCondition =
-        Object.keys(data).length === 0 || Object.keys(userData).length === 0
+const Profile = ({ data = [], userData }) => {
+    const loadingCondition = Object.keys(userData).length === 0
 
     return (
         <>

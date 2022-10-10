@@ -7,12 +7,11 @@ import Flashcards from '../flashcards'
 import FindOut from '../findOut'
 import KahootLike from '../kahootLIke'
 import Profile from '../profile'
-import { getList, getAuthMe } from '../../service/service'
+import { getMe } from '../../service/service'
 import TemplateHOC from './templateHOC'
 
 const App = () => {
     const [isAuth, setIsAuth] = useState(null)
-    const [state, setState] = useState({})
     const [userData, setUserData] = useState({})
 
     useEffect(() => {
@@ -20,7 +19,7 @@ const App = () => {
             setIsAuth(false)
             console.log('Authorization is required')
         } else {
-            getAuthMe()
+            getMe()
                 .then((res) => {
                     setIsAuth(true)
                     setUserData(res)
@@ -29,13 +28,6 @@ const App = () => {
                     console.log('Get Me error : ', err)
                 })
         }
-    }, [isAuth])
-
-    useEffect(() => {
-        if (!isAuth) return
-        getList().then((res) => {
-            setState(res)
-        })
     }, [isAuth])
 
     const authCondition = isAuth !== null && !isAuth
@@ -49,24 +41,38 @@ const App = () => {
                 <Routes>
                     <Route
                         path='/'
-                        element={<Profile data={state} userData={userData} />}
+                        element={
+                            <Profile
+                                data={userData.wordSets}
+                                userData={userData}
+                            />
+                        }
                     />
                     <Route
                         path='/template/flashcards'
                         element={
-                            <TemplateHOC Component={Flashcards} data={state} />
+                            <TemplateHOC
+                                Component={Flashcards}
+                                data={userData.wordSets}
+                            />
                         }
                     />
                     <Route
                         path='/template/findOut'
                         element={
-                            <TemplateHOC Component={FindOut} data={state} />
+                            <TemplateHOC
+                                Component={FindOut}
+                                data={userData.wordSets}
+                            />
                         }
                     />
                     <Route
                         path='/template/kahoot-like'
                         element={
-                            <TemplateHOC Component={KahootLike} data={state} />
+                            <TemplateHOC
+                                Component={KahootLike}
+                                data={userData.wordSets}
+                            />
                         }
                     />
                 </Routes>
