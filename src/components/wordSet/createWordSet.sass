@@ -1,0 +1,192 @@
+@mixin border-default
+    border: 2px solid #F29167
+    border-radius: 8px
+
+@mixin border-default-white
+    border: 2px solid #fff
+    border-radius: 8px
+
+@mixin border-inactive
+    background: none
+    cursor: pointer
+    transition: 0.3s
+    &:hover
+        border: none
+        background-color: #F29167
+        color: #fff
+
+@mixin text-overflow
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+.word-set
+    width: 100%
+    height: calc(100vh - 50px)
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    &__title
+        min-width: 230px
+        max-width: 320px
+        height: 70px
+        padding: 7px
+        display: flex
+        justify-content: center
+        align-items: center
+        outline: none
+        @include border-default
+        font-size: 23px
+        text-align: center
+        font-weight: bold
+        transition: 0.3s
+        &:focus
+            border-bottom: 5px solid #F29167
+            border-radius: 8px 8px 13px 13px
+        &:hover
+            border-bottom: 5px solid #F29167
+            border-radius: 8px 8px 13px 13px
+    &__words
+        width: 700px
+        height: calc(100% - 120px)
+        padding-top: 12px
+        display: flex
+        flex-direction: column
+        align-items: center
+        &__word
+            width: 100%
+            height: 60px
+            padding: 10px 12px
+            margin-bottom: 12px
+            position: relative
+            cursor: pointer
+            transition: 0.3s
+            @include border-default
+            &__count
+                position: absolute
+                bottom: 15px
+                left: -40px
+                font-size: 20px
+                color: #F29167
+            &__overview
+                display: flex
+                &__line
+                    height: 60px
+                    width: 25px
+                    margin-top: -12px
+                &__name
+                    width: 210px
+                    height: 100%
+                    font-size: 18px
+                    text-align: center
+                    padding-right: 8px
+                    padding-top: 7px
+                    @include text-overflow
+                &__descr
+                    width: 435px
+                    height: 100%
+                    padding-left: 8px
+                    padding-top: 9px
+                    @include text-overflow
+            &__edit
+                width: 100%
+                height: 100%
+                display: none
+                flex-direction: column
+                justify-content: space-between
+                align-items: center
+                &__name
+                    width: 400px
+                    height: 50px
+                    background-color: transparent
+                    padding: 10px
+                    outline: none
+                    @include border-default-white
+                    font-size: 18px
+                    text-align: center
+                    color: #fff
+                    transition: 0.3s
+                    &:focus
+                        border-bottom: 5px solid #fff
+                        border-radius: 8px 8px 13px 13px
+                    &::placeholder
+                        color: #ececec
+                &__descr
+                    width: 500px
+                    height: 200px
+                    background-color: transparent
+                    padding: 10px
+                    font-size: 18px
+                    @include border-default-white
+                    text-align: start
+                    color: #fff
+                    outline: none
+                    resize: none
+                    transition: 0.3s
+                    &:focus
+                        border-bottom: 5px solid #fff
+                        border-radius: 8px 8px 15px 15px
+                    &::placeholder
+                        color: #ececec
+                &__error
+                    width: 310px
+                    height: 40px
+                    padding: 10px
+                    color: #fff
+                    text-align: center
+                    background-color: #ff000041
+                    @include border-default-white
+                &__btns
+                    width: 500px
+                    height: 40px
+                    display: flex
+                    align-items: center
+                    justify-content: space-between
+                    &__btn
+                        width: 150px
+                        height: 40px
+                        color: #fff
+                        @include border-default-white
+                        background: none
+                        cursor: pointer
+                        transition: 0.3s
+                        &:hover
+                            border: none
+                            background-color: #fff
+                            color: #F29167
+            &_active
+                min-height: 400px
+                height: auto
+                cursor: default
+                background-color: #F29167
+                .word-set__words__word__overview
+                    display: none
+                .word-set__words__word__edit
+                    display: flex
+                &:hover
+                    height: auto !important
+                    border: 2px solid #F29167 !important
+                    border-radius: 8px !important
+                    box-shadow: none !important
+            &:last-child
+                margin: 0
+            &:hover
+                height: 63px
+                border-bottom: 5px solid #F29167
+                border-radius: 8px 8px 13px 13px
+                box-shadow: 0 1px 17px #b1b1b1
+    &__btns
+        width: 650px
+        min-height: 110px
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-around
+        align-items: center
+        &__btn
+            width: 230px
+            height: 50px
+            padding: 7px
+            @include border-default
+            font-size: 19px
+            @include border-inactive
