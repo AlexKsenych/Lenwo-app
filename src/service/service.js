@@ -32,3 +32,8 @@ export const postWordSet = async (wordSet) => {
     const res = await instance.post('/word-set', wordSet)
     return await res.data
 }
+
+export const updateWordSet = async (id, wordSet) => {
+    const res = await instance.post(`/word-set/${id}`, wordSet)
+    return await res.data
+}

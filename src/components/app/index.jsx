@@ -51,7 +51,12 @@ const App = () => {
                     />
                     <Route
                         path='/create-word-set'
-                        element={<WordSet setUserData={setUserData} />}
+                        element={
+                            <WordSet
+                                setUserData={setUserData}
+                                data={userData.wordSets}
+                            />
+                        }
                     />
                     <Route
                         path='/template/flashcards'

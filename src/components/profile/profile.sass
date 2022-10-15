@@ -53,14 +53,34 @@
                 justify-content: space-around
                 align-items: center
                 &__btn
-                    width: 35px
-                    height: 35px
+                    width: 45px
+                    height: 45px
+                    display: inline-block
+                    position: relative
                     background-color: #eaeaea
                     border: none
                     cursor: pointer
+                    transition: 0.3s
                     &__img
-                        width: 20px
-                        height: 20px
+                        width: 26px
+                        height: 26px
+                    &::after
+                        content: ''
+                        position: absolute
+                        width: 100%
+                        transform: scaleX(0)
+                        height: 2px
+                        bottom: 0
+                        left: 0
+                        background-color: #000
+                        transform-origin: bottom right
+                        transition: transform 0.25s ease-out
+                    &:hover
+                        padding-bottom: 7px
+                        &::after
+                            transform: scaleX(1)
+                            transform-origin: bottom left
+
             &__templates
                 position: absolute
                 bottom: 0

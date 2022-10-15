@@ -10,6 +10,10 @@ const ProfileList = ({ data }) => {
 
     const navigate = useNavigate()
 
+    const onUpdateWordSetClick = (id) => {
+        return navigate(`/create-word-set?id=${id}`)
+    }
+
     const listItems = data.map((item) => {
         const { title, id, words } = item
 
@@ -41,7 +45,10 @@ const ProfileList = ({ data }) => {
                     </div>
                 </div>
                 <div className='profile__list__item__btns'>
-                    <button className='profile__list__item__btns__btn'>
+                    <button
+                        onClick={() => onUpdateWordSetClick(id)}
+                        className='profile__list__item__btns__btn'
+                    >
                         <img
                             className='profile__list__item__btns__btn__img'
                             src={edit}

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import WordSetList from './wordSetList'
-import { postWordSet } from '../../service/service'
+import { postWordSet, updateWordSet } from '../../service/service'
 
 const initialState = {
     title: '',
@@ -86,8 +86,9 @@ const WordSet = ({ setUserData, data }) => {
 
     useEffect(() => {
         if (searchId) {
-            setState(data)
+            setState([...data].find((item) => item.id === searchId))
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const onWordClick = (id) => {
@@ -119,7 +120,7 @@ const WordSet = ({ setUserData, data }) => {
     }
 
     const onWordDeleteClick = (wordId) => {
-        const { id, title, words } = state
+        const { words } = state
 
         if (words.length === 4) {
             return setError({
@@ -129,8 +130,7 @@ const WordSet = ({ setUserData, data }) => {
         }
 
         setState({
-            id,
-            title,
+            ...state,
             words: [
                 ...words
                     .filter((item) => item.id !== wordId)
@@ -144,11 +144,10 @@ const WordSet = ({ setUserData, data }) => {
     }
 
     const onAddWordClick = () => {
-        const { id, title, words } = state
+        const { words } = state
 
         setState({
-            id,
-            title,
+            ...state,
             words: [
                 ...words,
                 {
@@ -169,7 +168,12 @@ const WordSet = ({ setUserData, data }) => {
             return
         }
 
-        postWordSet({ id, title, words })
+        if (searchId) {
+            updateWordSet(id, { title, words })
+        } else {
+            postWordSet({ title, words })
+        }
+
         setUserData({})
         navigate('/')
     }
