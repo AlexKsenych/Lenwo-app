@@ -3,6 +3,7 @@ import remove from '../../../assets/img/delete.png'
 import plus from '../../../assets/img/plus.png'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { deleteWordSet } from '../../../service/service'
 
 const ProfileList = ({ data }) => {
     const [isActive, setIsActive] = useState(false)
@@ -10,8 +11,17 @@ const ProfileList = ({ data }) => {
 
     const navigate = useNavigate()
 
-    const onUpdateWordSetClick = (id) => {
+    const onUpdateWordSetClick = (e, id) => {
+        e.stopPropagation()
         return navigate(`/create-word-set?id=${id}`)
+    }
+
+    const onDeleteWordSetClick = (e, id, title) => {
+        e.stopPropagation()
+        if (!window.confirm(`Do you want to delete this word set ${title} ?`))
+            return
+
+        deleteWordSet(id)
     }
 
     const listItems = data.map((item) => {
@@ -46,7 +56,7 @@ const ProfileList = ({ data }) => {
                 </div>
                 <div className='profile__list__item__btns'>
                     <button
-                        onClick={() => onUpdateWordSetClick(id)}
+                        onClick={(e) => onUpdateWordSetClick(e, id)}
                         className='profile__list__item__btns__btn'
                     >
                         <img
@@ -55,7 +65,10 @@ const ProfileList = ({ data }) => {
                             alt='edit'
                         />
                     </button>
-                    <button className='profile__list__item__btns__btn'>
+                    <button
+                        onClick={(e) => onDeleteWordSetClick(e, id, title)}
+                        className='profile__list__item__btns__btn'
+                    >
                         <img
                             className='profile__list__item__btns__btn__img'
                             src={remove}

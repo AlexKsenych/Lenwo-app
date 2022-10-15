@@ -37,3 +37,8 @@ export const updateWordSet = async (id, wordSet) => {
     const res = await instance.post(`/word-set/${id}`, wordSet)
     return await res.data
 }
+
+export const deleteWordSet = async (id) => {
+    const res = await instance.delete(`/word-set/${id}`)
+    return await res.data
+}
