@@ -29,7 +29,7 @@ const App = () => {
                     console.log('Get Me error : ', err)
                 })
         }
-    }, [isAuth])
+    }, [isAuth, userData])
 
     const authCondition = isAuth !== null && !isAuth
 
@@ -49,7 +49,10 @@ const App = () => {
                             />
                         }
                     />
-                    <Route path='/create-word-set' element={<WordSet />} />
+                    <Route
+                        path='/create-word-set'
+                        element={<WordSet setUserData={setUserData} />}
+                    />
                     <Route
                         path='/template/flashcards'
                         element={

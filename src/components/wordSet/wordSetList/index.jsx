@@ -7,7 +7,8 @@ const WordSetList = ({
     data = [],
     activeWordId,
     onWordClick,
-    onAcceptClick,
+    onWordAcceptClick,
+    onWordDeleteClick,
     error,
 }) => {
     const [currentNameValue, setCurrentNameValue] = useState('')
@@ -44,17 +45,25 @@ const WordSetList = ({
             >
                 <div className='word-set__words__word__count'>{i + 1}</div>
                 <div className='word-set__words__word__overview'>
-                    <div className='word-set__words__word__overview__name'>
-                        {name}
-                    </div>
-                    <img
-                        className='word-set__words__word__overview__line'
-                        src={line}
-                        alt='line'
-                    />
-                    <div className='word-set__words__word__overview__descr'>
-                        {descr}
-                    </div>
+                    {name ? (
+                        <>
+                            <div className='word-set__words__word__overview__name'>
+                                {name}
+                            </div>
+                            <img
+                                className='word-set__words__word__overview__line'
+                                src={line}
+                                alt='line'
+                            />
+                            <div className='word-set__words__word__overview__descr'>
+                                {descr}
+                            </div>
+                        </>
+                    ) : (
+                        <div className='word-set__words__word__overview__create-word'>
+                            Create word
+                        </div>
+                    )}
                 </div>
                 <div className='word-set__words__word__edit'>
                     <input
@@ -78,7 +87,7 @@ const WordSetList = ({
                     <div className='word-set__words__word__edit__btns'>
                         <button
                             onClick={() =>
-                                onAcceptClick(
+                                onWordAcceptClick(
                                     currentNameValue ? currentNameValue : name,
                                     currentDescrValue
                                         ? currentDescrValue
@@ -89,7 +98,10 @@ const WordSetList = ({
                         >
                             Accept
                         </button>
-                        <button className='word-set__words__word__edit__btns__btn'>
+                        <button
+                            onClick={() => onWordDeleteClick(id)}
+                            className='word-set__words__word__edit__btns__btn'
+                        >
                             Delete
                         </button>
                     </div>

@@ -1,11 +1,11 @@
 import './createWordSet.sass'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import WordSetList from './wordSetList'
+import { postWordSet } from '../../service/service'
 
 const initialState = {
-    id: '0',
     title: '',
     words: [
         {
@@ -71,9 +71,9 @@ const wordValidation = (name, descr, setError) => {
     return true
 }
 
-const WordSet = ({ data }) => {
+const WordSet = ({ setUserData, data }) => {
     const [activeWordId, setActiveWordId] = useState(null)
-    const [state, setState] = useState({})
+    const [state, setState] = useState(initialState)
     const [error, setError] = useState({
         isError: false,
         message: '',
@@ -82,11 +82,11 @@ const WordSet = ({ data }) => {
     const [searchParams] = useSearchParams()
     const searchId = searchParams.get('id')
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         if (searchId) {
             setState(data)
-        } else {
-            setState(initialState)
         }
     }, [])
 
@@ -96,24 +96,99 @@ const WordSet = ({ data }) => {
         setActiveWordId(id)
     }
 
-    const onAcceptClick = (nameValue, descrValue) => {
+    const onWordAcceptClick = (nameValue, descrValue) => {
         if (!wordValidation(nameValue, descrValue, setError)) return
 
         setState({
             ...state,
-            words: [...state.words].map((item) => {
-                if (item.id === activeWordId) {
-                    return {
-                        id: item.id,
-                        name: nameValue,
-                        descr: descrValue,
+            words: [
+                ...state.words.map((item) => {
+                    if (item.id === activeWordId) {
+                        return {
+                            id: item.id,
+                            name: nameValue,
+                            descr: descrValue,
+                        }
                     }
-                }
-                return item
-            }),
+                    return item
+                }),
+            ],
         })
 
         setActiveWordId(null)
+    }
+
+    const onWordDeleteClick = (wordId) => {
+        const { id, title, words } = state
+
+        if (words.length === 4) {
+            return setError({
+                isError: true,
+                message: 'Words can not be less than 4',
+            })
+        }
+
+        setState({
+            id,
+            title,
+            words: [
+                ...words
+                    .filter((item) => item.id !== wordId)
+                    .map((item, i) => {
+                        return { ...item, id: i + '' }
+                    }),
+            ],
+        })
+
+        setActiveWordId(null)
+    }
+
+    const onAddWordClick = () => {
+        const { id, title, words } = state
+
+        setState({
+            id,
+            title,
+            words: [
+                ...words,
+                {
+                    id: words.at(-1).id + 1,
+                    name: '',
+                    descr: '',
+                },
+            ],
+        })
+    }
+
+    const onCreateWordSetClick = () => {
+        const { id, title, words } = state
+        if (
+            ![...words].every((item) => item.name.trim().length > 0) ||
+            !title.trim().length > 0
+        ) {
+            return
+        }
+
+        postWordSet({ id, title, words })
+        setUserData({})
+        navigate('/')
+    }
+
+    const onTitleInputChange = (e) => {
+        const target = e.currentTarget.value
+
+        if (target.length > 42) return
+
+        setState({ ...state, title: target })
+    }
+
+    const wordSetListProps = {
+        data: state.words,
+        activeWordId,
+        onWordClick,
+        onWordAcceptClick,
+        onWordDeleteClick,
+        error,
     }
 
     return (
@@ -121,20 +196,25 @@ const WordSet = ({ data }) => {
             <input
                 className='word-set__title'
                 placeholder='Enter word set title'
-                defaultValue={state.title}
+                onChange={onTitleInputChange}
+                value={state.title}
             />
             <div className='word-set__words'>
-                <WordSetList
-                    data={state.words}
-                    activeWordId={activeWordId}
-                    onWordClick={onWordClick}
-                    onAcceptClick={onAcceptClick}
-                    error={error}
-                />
+                <WordSetList {...wordSetListProps} />
             </div>
             <div className='word-set__btns'>
-                <button className='word-set__btns__btn'>Add word</button>
-                <button className='word-set__btns__btn'>Create word set</button>
+                <button
+                    onClick={onAddWordClick}
+                    className='word-set__btns__btn'
+                >
+                    Add word
+                </button>
+                <button
+                    onClick={onCreateWordSetClick}
+                    className='word-set__btns__btn'
+                >
+                    Create word set
+                </button>
             </div>
         </div>
     )

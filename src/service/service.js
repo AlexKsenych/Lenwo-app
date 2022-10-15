@@ -27,3 +27,8 @@ export const getMe = async () => {
     })
     return await res.data.userData
 }
+
+export const postWordSet = async (wordSet) => {
+    const res = await instance.post('/word-set', wordSet)
+    return await res.data
+}
