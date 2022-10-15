@@ -16,19 +16,17 @@ const App = () => {
     const [userData, setUserData] = useState({})
 
     useEffect(() => {
-        if (!window.localStorage.getItem('token')) {
-            setIsAuth(false)
-            console.log('Authorization is required')
-        } else {
-            getMe()
-                .then((res) => {
-                    setIsAuth(true)
-                    setUserData(res)
-                })
-                .catch((err) => {
-                    console.log('Get Me error : ', err)
-                })
-        }
+        getMe()
+            .then((res) => {
+                setIsAuth(true)
+                setUserData(res)
+            })
+            .catch((err) => {
+                window.localStorage.removeItem('token')
+                setIsAuth(false)
+                console.log('Authorization is required')
+                console.log('Get me request has been failed : ', err)
+            })
     }, [isAuth, userData])
 
     const authCondition = isAuth !== null && !isAuth

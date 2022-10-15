@@ -38,23 +38,15 @@ const wordValidation = (name, descr, setError) => {
     if (pureNameLength < 1) {
         setError({
             isError: true,
-            message: 'Name is less than 1 letter',
+            message: 'Name can not be less than 1 letter',
         })
         return false
     }
 
-    if (pureNameLength > 32) {
+    if (name.length > 32) {
         setError({
             isError: true,
-            message: 'Name is bigger than 32 letters',
-        })
-        return false
-    }
-
-    if (pureDescrLength < 5) {
-        setError({
-            isError: true,
-            message: 'Description is less than 5 letters',
+            message: `Name can not be bigger than 32 letters, you have ${name.length} letters`,
         })
         return false
     }
@@ -62,7 +54,15 @@ const wordValidation = (name, descr, setError) => {
     if (pureDescrLength < 5) {
         setError({
             isError: true,
-            message: 'Description is bigger than 320 letters',
+            message: 'Description can not be less than 5 letters',
+        })
+        return false
+    }
+
+    if (descr.length > 320) {
+        setError({
+            isError: true,
+            message: `Description can not be bigger than 320 letters, you have ${descr.length} letters`,
         })
         return false
     }

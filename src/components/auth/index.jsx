@@ -8,12 +8,47 @@ const onChange = (e, setData) => {
     return setData(value)
 }
 
+const registerValidation = (name, email, password, setError) => {
+    if (name.trim().length < 3) {
+        setError({
+            isError: true,
+            message: 'Full name can not be less than 3 letters',
+        })
+        return false
+    }
+
+    if (email.trim().length < 5) {
+        setError({
+            isError: true,
+            message: 'Email can not be less than 3 letters',
+        })
+        return false
+    }
+
+    if (password.trim().length < 8) {
+        setError({
+            isError: true,
+            message: 'Password can not be less than 8 letters',
+        })
+        return false
+    }
+
+    setError({
+        isError: false,
+        message: '',
+    })
+    return true
+}
+
 const Auth = ({ setIsAuth }) => {
     const [isLogin, setIsLogin] = useState(true)
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('google@gmail.com')
     const [password, setPassword] = useState('12345')
-    const [isError, setIsError] = useState(false)
+    const [error, setError] = useState({
+        isError: false,
+        message: '',
+    })
 
     const onFormSubmit = (e) => {
         e.preventDefault()
@@ -28,27 +63,38 @@ const Auth = ({ setIsAuth }) => {
                 })
                 .catch((err) => {
                     console.log('Auth error :', err)
-                    setIsError(true)
+                    setError({
+                        isError: true,
+                        message: 'Incorrect email or password',
+                    })
                 })
         } else {
+            if (!registerValidation(fullName, email, password, setError)) return
             postRegister({
                 fullName,
                 email,
                 password,
             })
                 .then((res) => {
-                    console.log(res)
                     window.localStorage.setItem('token', res.token)
                     setIsAuth(true)
                 })
                 .catch((err) => {
                     console.log('Auth error :', err)
-                    setIsError(true)
+                    setError({
+                        isError: true,
+                        message: err.response.data.message,
+                    })
                 })
         }
     }
 
-    const onFullNameChange = (e) => onChange(e, setFullName)
+    const onFullNameChange = (e) => {
+        const value = e.currentTarget.value
+        if (value > 36) return
+
+        return setFullName(value)
+    }
 
     const onEmailChange = (e) => onChange(e, setEmail)
 
@@ -110,11 +156,9 @@ const Auth = ({ setIsAuth }) => {
                     value={password}
                     onChange={onPasswordChange}
                 />
-                <div
-                    className={isClassNameActive(!isError, 'auth__form__error')}
-                >
-                    Incorrect email or password
-                </div>
+                {error.isError ? (
+                    <div className='auth__form__error'>{error.message}</div>
+                ) : null}
                 <button
                     type='submit'
                     className={isClassNameActive(
