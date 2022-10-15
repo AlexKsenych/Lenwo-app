@@ -2,42 +2,11 @@ import './auth.sass'
 import { postLogin, postRegister } from '../../service/service'
 import { useState } from 'react'
 import { isClassNameActive } from '../../utils/functions'
+import { registerValidation } from '../../utils/validations'
 
 const onChange = (e, setData) => {
     const value = e.currentTarget.value
     return setData(value)
-}
-
-const registerValidation = (name, email, password, setError) => {
-    if (name.trim().length < 3) {
-        setError({
-            isError: true,
-            message: 'Full name can not be less than 3 letters',
-        })
-        return false
-    }
-
-    if (email.trim().length < 5) {
-        setError({
-            isError: true,
-            message: 'Email can not be less than 3 letters',
-        })
-        return false
-    }
-
-    if (password.trim().length < 8) {
-        setError({
-            isError: true,
-            message: 'Password can not be less than 8 letters',
-        })
-        return false
-    }
-
-    setError({
-        isError: false,
-        message: '',
-    })
-    return true
 }
 
 const Auth = ({ setIsAuth }) => {

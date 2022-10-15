@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import WordSetList from './wordSetList'
 import { postWordSet, updateWordSet } from '../../service/service'
+import { wordSetValidation } from '../../utils/validations'
 
 const initialState = {
     title: '',
@@ -29,46 +30,6 @@ const initialState = {
             descr: '',
         },
     ],
-}
-
-const wordValidation = (name, descr, setError) => {
-    const pureNameLength = name.trim().length,
-        pureDescrLength = descr.trim().length
-
-    if (pureNameLength < 1) {
-        setError({
-            isError: true,
-            message: 'Name can not be less than 1 letter',
-        })
-        return false
-    }
-
-    if (name.length > 32) {
-        setError({
-            isError: true,
-            message: `Name can not be bigger than 32 letters, you have ${name.length} letters`,
-        })
-        return false
-    }
-
-    if (pureDescrLength < 5) {
-        setError({
-            isError: true,
-            message: 'Description can not be less than 5 letters',
-        })
-        return false
-    }
-
-    if (descr.length > 320) {
-        setError({
-            isError: true,
-            message: `Description can not be bigger than 320 letters, you have ${descr.length} letters`,
-        })
-        return false
-    }
-
-    setError({ isError: false, message: '' })
-    return true
 }
 
 const WordSet = ({ setUserData, data }) => {
@@ -98,7 +59,7 @@ const WordSet = ({ setUserData, data }) => {
     }
 
     const onWordAcceptClick = (nameValue, descrValue) => {
-        if (!wordValidation(nameValue, descrValue, setError)) return
+        if (!wordSetValidation(nameValue, descrValue, setError)) return
 
         setState({
             ...state,
