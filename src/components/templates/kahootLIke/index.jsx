@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
-import { changeClassNameByCondition, shuffleArray } from '../../utils/functions'
-import Loading from '../../utils/loading'
-import UserResult from '../userResult'
+import {
+    changeClassNameByCondition,
+    shuffleArray,
+} from '../../../utils/functions'
+import Loading from '../../../utils/loading'
+import UserResult from '../../userResult'
 import './kahootLike.sass'
 
 const createRandomNumbers = (arrLength, currNum) => {

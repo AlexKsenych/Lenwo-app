@@ -2,7 +2,7 @@ import React from 'react'
 import imgNotFound from '../../../assets/img/image-not-found.png'
 import { isClassNameActive } from '../../../utils/functions'
 
-const ProfileUserInfo = ({ data, setsLength }) => {
+const ProfileUser = ({ data, setsLength }) => {
     const { fullName, img, dayStreak } = data
 
     return (
@@ -32,4 +32,4 @@ const ProfileUserInfo = ({ data, setsLength }) => {
     )
 }
 
-export default ProfileUserInfo
+export default ProfileUser

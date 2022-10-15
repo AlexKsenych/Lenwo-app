@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { isClassNameActive } from '../../../utils/functions'
+import { isClassNameActive } from '../../../../utils/functions'
 
-const Flashcard = ({ data = {}, onNextClick, currentNum, dataLength }) => {
+const FlashcardsItem = ({ data = {}, onNextClick, currentNum, dataLength }) => {
     const [isActiveClass, setIsActiveClass] = useState(false)
     const { name, descr } = data
     const img = null
@@ -55,4 +55,4 @@ const Flashcard = ({ data = {}, onNextClick, currentNum, dataLength }) => {
     )
 }
 
-export default Flashcard
+export default FlashcardsItem

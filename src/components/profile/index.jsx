@@ -1,6 +1,6 @@
 import './profile.sass'
 import ProfileList from './profileList'
-import ProfileUserInfo from './profileUserInfo'
+import ProfileUser from './profileUser'
 import Loading from '../../utils/loading'
 
 const Profile = ({ data = [], userData }) => {
@@ -13,7 +13,7 @@ const Profile = ({ data = [], userData }) => {
             ) : (
                 <div className='profile'>
                     <ProfileList data={data} />
-                    <ProfileUserInfo data={userData} setsLength={data.length} />
+                    <ProfileUser data={userData} setsLength={data.length} />
                 </div>
             )}
         </>

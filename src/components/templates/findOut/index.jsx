@@ -1,10 +1,10 @@
 import './findOut.sass'
-import arrowImg from '../../assets/img/arrow.png'
-import correctImg from '../../assets/img/correct.png'
+import arrowImg from '../../../assets/img/arrow.png'
+import correctImg from '../../../assets/img/correct.png'
 import { useState, useEffect } from 'react'
-import UserResult from '../userResult'
-import { isClassNameActive } from '../../utils/functions'
-import { shuffleArray } from '../../utils/functions'
+import UserResult from '../../userResult'
+import { isClassNameActive } from '../../../utils/functions'
+import { shuffleArray } from '../../../utils/functions'
 
 const checkStrings = (firstStr, secondStr) => {
     const pureFirstStr = firstStr.trim().toLowerCase()

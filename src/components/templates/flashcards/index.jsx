@@ -1,6 +1,6 @@
 import './flashcards.sass'
-import Flashcard from './flashcard'
-import UserResult from '../userResult'
+import FlashcardsItem from './flashcardsItem'
+import UserResult from '../../userResult'
 import { useEffect, useState } from 'react'
 
 const Flashcards = ({ words }) => {
@@ -40,7 +40,7 @@ const Flashcards = ({ words }) => {
         />
     ) : (
         <main className='flashcards'>
-            <Flashcard data={state[currentNum]} {...flashcardProps} />
+            <FlashcardsItem data={state[currentNum]} {...flashcardProps} />
         </main>
     )
 }
