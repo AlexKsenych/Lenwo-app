@@ -1,13 +1,22 @@
 import edit from '../../../assets/img/edit.png'
 import remove from '../../../assets/img/delete.png'
 import plus from '../../../assets/img/plus.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { deleteWordSet } from '../../../service/service'
 
 const ProfileList = ({ data }) => {
     const [isActive, setIsActive] = useState(false)
     const [activeId, setActiveId] = useState()
+    const [matches, setMatches] = useState(
+        window.matchMedia('(max-width: 769px)').matches
+    )
+
+    useEffect(() => {
+        window
+            .matchMedia('(max-width: 769px)')
+            .addEventListener('change', (e) => setMatches(e.matches))
+    }, [])
 
     const navigate = useNavigate()
 
@@ -24,10 +33,12 @@ const ProfileList = ({ data }) => {
         deleteWordSet(id)
     }
 
-    const listItems = data.map((item) => {
+    const listItems = [...data].map((item) => {
         const { title, id, words } = item
 
-        const descrWords = `${words[0].name}, ${words[1].name}, ${words[2].name}... / ${words.length} words in total`
+        const descrWords = matches
+            ? `${words.length} words in total`
+            : `${words[0].name}, ${words[1].name}, ${words[2].name}... / ${words.length} words in total`
 
         const onItemClick = () => {
             setIsActive(!isActive)
@@ -111,9 +122,8 @@ const ProfileList = ({ data }) => {
     return (
         <div className='profile__list'>
             {listItems}
-            <div className='profile__list__item'>
+            <div onClick={onAddItem} className='profile__list__item'>
                 <img
-                    onClick={onAddItem}
                     className='profile__list__item__plus'
                     src={plus}
                     alt='Add item'

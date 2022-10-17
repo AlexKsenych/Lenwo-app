@@ -32,7 +32,7 @@ const initialState = {
     ],
 }
 
-const WordSet = ({ setUserData, data }) => {
+const WordSet = ({ setIsAuth, data }) => {
     const [activeWordId, setActiveWordId] = useState(null)
     const [state, setState] = useState(initialState)
     const [error, setError] = useState({
@@ -135,7 +135,7 @@ const WordSet = ({ setUserData, data }) => {
             postWordSet({ title, words })
         }
 
-        setUserData({})
+        setIsAuth(null)
         navigate('/')
     }
 

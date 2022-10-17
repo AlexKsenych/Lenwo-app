@@ -27,7 +27,7 @@ const App = () => {
                 console.log('Authorization is required')
                 console.log('Get me request has been failed : ', err)
             })
-    }, [isAuth, userData])
+    }, [isAuth])
 
     const authCondition = isAuth !== null && !isAuth
 
@@ -51,7 +51,7 @@ const App = () => {
                         path='/create-word-set'
                         element={
                             <WordSet
-                                setUserData={setUserData}
+                                setIsAuth={setIsAuth}
                                 data={userData.wordSets}
                             />
                         }

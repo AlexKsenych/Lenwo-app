@@ -1,11 +1,15 @@
 .profile
-    display: grid
-    grid-template-columns: 1fr 400px
-    grid-template-rows: 1fr
-    grid-template-areas: 'list user'
+    width: 100%
+    min-height: 400px
+    height: auto
+    display: flex
+    position: relative
     padding: 0 10px
+    padding-bottom: 15px
     &__list
-        min-height: 500px
+        min-height: 400px
+        height: auto
+        width: calc( 100% - 310px )
         margin-right: 10px
         padding: 10px 25px
         display: flex
@@ -13,7 +17,6 @@
         align-items: center
         z-index: 1
         background-color: #eaeaea
-        grid-area: 'list'
         border-radius: 30px
         &__item
             width: 100%
@@ -30,10 +33,12 @@
             &:last-child
                 width: 70px
                 height: 70px
+                margin-top: 5px
                 background: none
                 justify-content: center
                 border: none
                 &:hover
+                    height: 70px
                     border: none
                     transform: rotate(90deg)
             &__plus
@@ -107,7 +112,10 @@
                     &:hover
                         background-color: #ffb093
     &__user
-        grid-area: 'user'
+        position: fixed
+        right: 10px
+        width: 300px
+        height: 400px
         display: flex
         flex-direction: column
         justify-content: space-between
@@ -122,6 +130,7 @@
         &__name
             font-size: 27px
         &__descr
+            width: 300px
             height: 40px
             display: flex
             justify-content: space-between

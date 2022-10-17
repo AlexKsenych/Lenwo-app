@@ -6,3 +6,16 @@
   font-family: 'Roboto', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+
+@media only screen and ( max-width: 993px )
+  body
+    .profile
+      display: flex
+      flex-direction: column-reverse
+      align-items: center
+      &__list
+        width: 100%
+        margin-right: 0
+        margin-top: 15px
+      &__user
+        position: static
