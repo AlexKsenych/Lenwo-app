@@ -20,7 +20,7 @@
         border-radius: 30px
         &__item
             width: 100%
-            height: 100px
+            min-height: 100px
             padding: 10px
             position: relative
             display: flex
@@ -46,6 +46,9 @@
                 height: 50px
             &__descr
                 &__title
+                    max-width: 400px
+                    overflow: hidden
+                    overflow-wrap: break-word
                     font-size: 23px
                 &__words
                     margin-left: 12px
@@ -96,7 +99,7 @@
                 display: flex
                 justify-content: space-around
                 align-items: center
-                background-color: #ff45008c
+                background: none
                 transition: 0.5s all
                 &__template
                     display: flex
@@ -106,6 +109,7 @@
                     height: 100%
                     border-right: 2px solid #eaeaea
                     color: #fff
+                    text-align: center
                     text-decoration: none
                     &:last-child
                         border: none
@@ -145,7 +149,7 @@
                 font-size: 18px
             &__value
                 padding-right: 10px
-                width: 200px
+                width: 150px
                 height: 20px
                 text-align: right
 
@@ -156,3 +160,4 @@
 
 .templates_active
     bottom: -41px
+    background-color: #ff45008c

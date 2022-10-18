@@ -2,10 +2,7 @@
   margin: 0
   padding: 0
   box-sizing: border-box
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap')
-  font-family: 'Roboto', sans-serif
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
+  font-family: 'Montserrat', sans-serif
 
 @media only screen and ( max-width: 993px )
   body
@@ -19,3 +16,38 @@
         margin-top: 15px
       &__user
         position: static
+
+@media only screen and ( max-width: 577px )
+  body
+    .auth
+      &__form
+        width: 345px
+
+    .profile
+      &__list
+        padding: 15px 5px
+        &__item
+          &__descr
+            &__title
+              max-width: 180px
+              white-space: nowrap
+              overflow: hidden
+              text-overflow: ellipsis
+          &__btns
+            width: 110px
+
+    .flashcards
+      &__flashcard
+        width: 315px
+
+    .find-out
+      &__container
+        &__wrapper
+          &__idk
+            top: 60px
+            left: 20px
+          &__next
+            top: 60px
+            right: 20px
+          &__prev-word
+            display: none

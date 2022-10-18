@@ -1,7 +1,8 @@
 .flashcards
     position: relative
     width: 100%
-    height: calc(100vh - 85px)
+    height: auto
+    margin-top: 30px
     display: flex
     justify-content: center
     align-items: center
@@ -73,5 +74,6 @@
             &__back
                 transform: rotateY(180deg)
                 &__definition
+                    overflow: hidden
                     overflow-wrap: break-word
                     font-size: 20px
