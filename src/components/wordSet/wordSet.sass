@@ -22,16 +22,18 @@
 
 .word-set
     width: 100%
-    height: calc(100vh - 50px)
+    height: auto
+    margin-bottom: 15px
     display: flex
     flex-direction: column
     justify-content: space-between
     align-items: center
     &__title
-        min-width: 230px
-        max-width: 320px
+        min-width: 250px
+        width: 40%
         height: 70px
         padding: 7px
+        margin: 0 5px
         display: flex
         justify-content: center
         align-items: center
@@ -48,7 +50,8 @@
             border-bottom: 5px solid #F29167
             border-radius: 8px 8px 13px 13px
     &__words
-        width: 700px
+        min-width: 300px
+        width: 75%
         height: auto
         padding-top: 12px
         display: flex
@@ -65,10 +68,14 @@
             @include border-default
             &__count
                 position: absolute
+                width: 39px
                 bottom: 15px
-                left: -40px
+                left: -21px
                 font-size: 20px
+                text-align: center
                 color: #F29167
+                border-radius: 0 5px 5px 0
+                background-color: #fff
             &__overview
                 display: flex
                 &__line
@@ -78,6 +85,7 @@
                 &__name
                     width: 210px
                     height: 100%
+                    padding-left: 7px
                     font-size: 18px
                     text-align: center
                     padding-right: 8px
@@ -99,10 +107,11 @@
                 height: 100%
                 display: none
                 flex-direction: column
-                justify-content: space-between
+                justify-content: space-around
                 align-items: center
                 &__name
-                    width: 400px
+                    min-width: 280px
+                    width: 80%
                     height: 50px
                     background-color: transparent
                     padding: 10px
@@ -118,7 +127,8 @@
                     &::placeholder
                         color: #ececec
                 &__descr
-                    width: 500px
+                    min-width: 290px
+                    width: 90%
                     height: 200px
                     background-color: transparent
                     padding: 10px
@@ -126,6 +136,7 @@
                     @include border-default-white
                     text-align: start
                     color: #fff
+                    overflow: auto
                     outline: none
                     resize: none
                     transition: 0.3s
@@ -134,25 +145,39 @@
                         border-radius: 8px 8px 15px 15px
                     &::placeholder
                         color: #ececec
+                        overflow: auto
+                    &::-webkit-scrollbar
+                        width: 12px
+                    &::-webkit-scrollbar-track
+                        border: 2px solid #ffffffcc
+                        width: 10px
+                        border-radius: 12px
+                    &::-webkit-scrollbar-thumb
+                        background-color: #fff
+                        width: 10px
+                        border-radius: 12px
                 &__error
-                    min-width: 310px
+                    min-width: 280px
                     max-width: 650px
-                    height: 40px
+                    min-height: 40px
+                    height: auto
                     padding: 10px
                     color: #fff
                     text-align: center
                     background-color: #ff000041
                     @include border-default-white
                 &__btns
-                    width: 500px
-                    height: 40px
+                    width: 90%
+                    height: auto
                     display: flex
+                    flex-wrap: wrap
                     align-items: center
-                    justify-content: space-between
+                    justify-content: space-around
                     &__btn
                         width: 150px
                         height: 40px
                         color: #fff
+                        margin-top: 7px
                         @include border-default-white
                         background: none
                         cursor: pointer
@@ -162,8 +187,7 @@
                             background-color: #fff
                             color: #F29167
             &_active
-                min-height: 400px
-                height: auto
+                min-height: 470px
                 cursor: default
                 background-color: #F29167
                 .word-set__words__word__overview
@@ -171,7 +195,7 @@
                 .word-set__words__word__edit
                     display: flex
                 &:hover
-                    height: auto !important
+                    height: 470px !important
                     border: 2px solid #F29167 !important
                     border-radius: 8px !important
                     box-shadow: none !important
@@ -181,10 +205,11 @@
                 height: 63px
                 border-bottom: 5px solid #F29167
                 border-radius: 8px 8px 13px 13px
-                box-shadow: 0 1px 10px #b1b1b1
+                box-shadow: 0 1px 5px #b1b1b1
     &__btns
-        width: 650px
+        width: 90%
         min-height: 110px
+        margin-top: 10px
         display: flex
         flex-wrap: wrap
         justify-content: space-around

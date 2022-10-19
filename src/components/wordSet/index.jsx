@@ -1,4 +1,4 @@
-import './createWordSet.sass'
+import './wordSet.sass'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
