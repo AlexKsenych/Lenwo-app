@@ -3,7 +3,7 @@ import imgNotFound from '../../../assets/img/image-not-found.png'
 import { isClassNameActive } from '../../../utils/functions'
 
 const ProfileUser = ({ data, setsLength }) => {
-    const { fullName, img, dayStreak } = data
+    const { fullName, img } = data
 
     return (
         <div className='profile__user'>
@@ -21,12 +21,6 @@ const ProfileUser = ({ data, setsLength }) => {
                     Number of sets :
                 </div>
                 <div className='profile__user__descr__value'>{setsLength}</div>
-            </div>
-            <div className='profile__user__descr'>
-                <div className='profile__user__descr__title'>
-                    My day streak :
-                </div>
-                <div className='profile__user__descr__value'>{dayStreak}</div>
             </div>
         </div>
     )
