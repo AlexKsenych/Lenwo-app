@@ -35,6 +35,7 @@ const initialState = {
 const WordSet = ({ setIsAuth, data }) => {
     const [activeWordId, setActiveWordId] = useState(null)
     const [state, setState] = useState(initialState)
+    const [isCreate, setIsCreate] = useState(false)
     const [error, setError] = useState({
         isError: false,
         message: '',
@@ -51,6 +52,17 @@ const WordSet = ({ setIsAuth, data }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    useEffect(() => {
+        if (
+            [...state.words].every((item) => item.name.trim().length > 0) &&
+            state.title.trim().length > 0
+        ) {
+            return setIsCreate(true)
+        } else {
+            return setIsCreate(false)
+        }
+    }, [state])
 
     const onWordClick = (id) => {
         if (activeWordId) return
@@ -122,12 +134,6 @@ const WordSet = ({ setIsAuth, data }) => {
 
     const onCreateWordSetClick = () => {
         const { id, title, words } = state
-        if (
-            ![...words].every((item) => item.name.trim().length > 0) ||
-            !title.trim().length > 0
-        ) {
-            return
-        }
 
         if (searchId) {
             updateWordSet(id, { title, words })
@@ -176,7 +182,11 @@ const WordSet = ({ setIsAuth, data }) => {
                 </button>
                 <button
                     onClick={onCreateWordSetClick}
-                    className='word-set__btns__btn'
+                    className={
+                        isCreate
+                            ? 'word-set__btns__btn'
+                            : 'word-set__btns__btn word-set__btns__btn_inactive'
+                    }
                 >
                     Create word set
                 </button>
