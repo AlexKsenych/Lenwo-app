@@ -12,8 +12,8 @@ const onChange = (e, setData) => {
 const Auth = ({ setIsAuth }) => {
     const [isLogin, setIsLogin] = useState(true)
     const [fullName, setFullName] = useState('')
-    const [email, setEmail] = useState('google@gmail.com')
-    const [password, setPassword] = useState('12345')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [error, setError] = useState({
         isError: false,
         message: '',
