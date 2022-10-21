@@ -59,6 +59,7 @@ const App = () => {
                                 data={userData.wordSets}
                                 userData={userData}
                                 language={language}
+                                setIsAuth={setIsAuth}
                             />
                         }
                     />

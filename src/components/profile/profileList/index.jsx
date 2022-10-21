@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { deleteWordSet } from '../../../service/service'
 import { profileLanguageObj } from '../../../utils/languageObj'
 
-const ProfileList = ({ data, language }) => {
+const ProfileList = ({ data, language, setIsAuth }) => {
     const [isActive, setIsActive] = useState(false)
     const [activeId, setActiveId] = useState()
     const [matches, setMatches] = useState(
@@ -29,13 +29,13 @@ const ProfileList = ({ data, language }) => {
     const onDeleteWordSetClick = (e, id, title) => {
         e.stopPropagation()
         if (
-            !window.confirm(
+            window.confirm(
                 `${profileLanguageObj.deleteSetAlert[language]} ${title} ?`
             )
-        )
-            return
-
-        deleteWordSet(id)
+        ) {
+            deleteWordSet(id)
+            setIsAuth(null)
+        }
     }
 
     const listItems = [...data].map((item) => {
