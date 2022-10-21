@@ -6,6 +6,8 @@ import UserResult from '../../userResult'
 import { isClassNameActive } from '../../../utils/functions'
 import { shuffleArray } from '../../../utils/functions'
 import { findOutLanguageObj } from '../../../utils/languageObj'
+import { useContext } from 'react'
+import { LanguageContext } from '../../app/templateHOC'
 
 const checkStrings = (firstStr, secondStr) => {
     const pureFirstStr = firstStr.trim().toLowerCase()
@@ -23,13 +25,15 @@ const inputBooleanClass = (condition) => {
         : `${inputClassName} ${inputClassName}_false`
 }
 
-const FindOut = ({ words, language }) => {
+const FindOut = ({ words }) => {
     const [previousWord, setPreviousWord] = useState('')
     const [unknownWords, setUnknownWords] = useState([])
     const [isTrue, setIsTrue] = useState(null)
     const [state, setState] = useState([])
     const [inputValue, setInputValue] = useState('')
     const [currentNum, setCurrentNum] = useState(0)
+
+    const language = useContext(LanguageContext)
 
     const img = null
 
@@ -79,7 +83,6 @@ const FindOut = ({ words, language }) => {
             onRestart={onRestart}
             unknownWordsArray={unknownWords}
             data={state}
-            language={language}
         />
     ) : (
         <main className='find-out'>

@@ -1,6 +1,9 @@
+import { createContext } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-const TemplateHOC = ({ Component, data, ...rest }) => {
+export const LanguageContext = createContext('EN')
+
+const TemplateHOC = ({ Component, data, language }) => {
     const [searchParams] = useSearchParams()
     const searchId = searchParams.get('id')
 
@@ -9,7 +12,9 @@ const TemplateHOC = ({ Component, data, ...rest }) => {
     return (
         <>
             <div className='title'>{title}</div>
-            <Component words={words} title={title} {...rest} />
+            <LanguageContext.Provider value={language}>
+                <Component words={words} title={title} />
+            </LanguageContext.Provider>
         </>
     )
 }

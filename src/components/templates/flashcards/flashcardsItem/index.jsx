@@ -1,17 +1,15 @@
+import { useContext } from 'react'
 import { useState } from 'react'
 import { isClassNameActive } from '../../../../utils/functions'
 import { flashcardsLanguageObj } from '../../../../utils/languageObj'
+import { LanguageContext } from '../../../app/templateHOC'
 
-const FlashcardsItem = ({
-    data = {},
-    onNextClick,
-    currentNum,
-    dataLength,
-    language,
-}) => {
+const FlashcardsItem = ({ data = {}, onNextClick, currentNum, dataLength }) => {
     const [isActiveClass, setIsActiveClass] = useState(false)
     const { name, descr } = data
     const img = null
+
+    const language = useContext(LanguageContext)
 
     const onFlashcardClick = () => setIsActiveClass(!isActiveClass)
 

@@ -1,6 +1,8 @@
 import './userResult.sass'
 import { Link } from 'react-router-dom'
 import { userResultLanguageObj } from '../../utils/languageObj'
+import { LanguageContext } from '../app/templateHOC'
+import { useContext } from 'react'
 
 const findKnownWords = (unknownWords = [], arr) => {
     if (unknownWords.length === 0) return arr
@@ -15,12 +17,14 @@ const findKnownWords = (unknownWords = [], arr) => {
 
 const fromArrayToString = (arr) => arr.map((item) => item.name).join(', ')
 
-const UserResult = ({ onRestart, unknownWordsArray, data, language }) => {
+const UserResult = ({ onRestart, unknownWordsArray, data }) => {
     const unknownWordsString = fromArrayToString(unknownWordsArray)
 
     const knownWordsString = fromArrayToString(
         findKnownWords(unknownWordsArray, data)
     )
+
+    const language = useContext(LanguageContext)
 
     return (
         <div className='user-result'>
