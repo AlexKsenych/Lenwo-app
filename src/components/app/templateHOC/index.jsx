@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 
-const TemplateHOC = ({ Component, data }) => {
+const TemplateHOC = ({ Component, data, ...rest }) => {
     const [searchParams] = useSearchParams()
     const searchId = searchParams.get('id')
 
@@ -9,7 +9,7 @@ const TemplateHOC = ({ Component, data }) => {
     return (
         <>
             <div className='title'>{title}</div>
-            <Component words={words} title={title} />
+            <Component words={words} title={title} {...rest} />
         </>
     )
 }

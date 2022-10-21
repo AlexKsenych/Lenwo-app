@@ -1,5 +1,6 @@
 import './userResult.sass'
 import { Link } from 'react-router-dom'
+import { userResultLanguageObj } from '../../utils/languageObj'
 
 const findKnownWords = (unknownWords = [], arr) => {
     if (unknownWords.length === 0) return arr
@@ -14,7 +15,7 @@ const findKnownWords = (unknownWords = [], arr) => {
 
 const fromArrayToString = (arr) => arr.map((item) => item.name).join(', ')
 
-const UserResult = ({ onRestart, unknownWordsArray, data }) => {
+const UserResult = ({ onRestart, unknownWordsArray, data, language }) => {
     const unknownWordsString = fromArrayToString(unknownWordsArray)
 
     const knownWordsString = fromArrayToString(
@@ -26,7 +27,7 @@ const UserResult = ({ onRestart, unknownWordsArray, data }) => {
             <div className='user-result__wrapper'>
                 <div className='user-result__wrapper__card'>
                     <div className='user-result__wrapper__card__title'>
-                        Words you should work at
+                        {userResultLanguageObj.unknownWordsTitle[language]}
                     </div>
                     <div className='user-result__wrapper__card__words'>
                         {unknownWordsString}
@@ -35,18 +36,18 @@ const UserResult = ({ onRestart, unknownWordsArray, data }) => {
                         onClick={onRestart}
                         className='user-result__wrapper__card__btn'
                     >
-                        Restart
+                        {userResultLanguageObj.restart[language]}
                     </button>
                 </div>
                 <div className='user-result__wrapper__card'>
                     <div className='user-result__wrapper__card__title'>
-                        Words that you know
+                        {userResultLanguageObj.knownWordsTitle[language]}
                     </div>
                     <div className='user-result__wrapper__card__words'>
                         {knownWordsString}
                     </div>
                     <Link to={'/'} className='user-result__wrapper__card__btn'>
-                        Back to the profile
+                        {userResultLanguageObj.toProfile[language]}
                     </Link>
                 </div>
             </div>

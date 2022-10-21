@@ -3,13 +3,14 @@ import { postLogin, postRegister } from '../../service/service'
 import { useState } from 'react'
 import { isClassNameActive } from '../../utils/functions'
 import { registerValidation } from '../../utils/validations'
+import { authLanguageObj } from '../../utils/languageObj'
 
 const onChange = (e, setData) => {
     const value = e.currentTarget.value
     return setData(value)
 }
 
-const Auth = ({ setIsAuth }) => {
+const Auth = ({ setIsAuth, language }) => {
     const [isLogin, setIsLogin] = useState(true)
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
@@ -71,6 +72,10 @@ const Auth = ({ setIsAuth }) => {
 
     const onButtonClick = () => {
         setIsLogin(!isLogin)
+
+        setFullName('')
+        setEmail('')
+        setPassword('')
     }
 
     const submitCondition = isLogin
@@ -89,7 +94,7 @@ const Auth = ({ setIsAuth }) => {
                             'auth__form__links__link'
                         )}
                     >
-                        Login
+                        {authLanguageObj.login[language]}
                     </button>
                     <button
                         type='button'
@@ -99,14 +104,14 @@ const Auth = ({ setIsAuth }) => {
                             'auth__form__links__link'
                         )}
                     >
-                        Sign Up
+                        {authLanguageObj.signUp[language]}
                     </button>
                 </div>
                 {isLogin ? null : (
                     <input
                         className='auth__form__input'
                         type='text'
-                        placeholder='Full Name'
+                        placeholder={authLanguageObj.fullName[language]}
                         value={fullName}
                         onChange={onFullNameChange}
                     />
@@ -114,14 +119,14 @@ const Auth = ({ setIsAuth }) => {
                 <input
                     className='auth__form__input'
                     type='email'
-                    placeholder='Email'
+                    placeholder={authLanguageObj.email[language]}
                     value={email}
                     onChange={onEmailChange}
                 />
                 <input
                     className='auth__form__input'
                     type='text'
-                    placeholder='Password'
+                    placeholder={authLanguageObj.password[language]}
                     value={password}
                     onChange={onPasswordChange}
                 />
@@ -135,7 +140,9 @@ const Auth = ({ setIsAuth }) => {
                         'auth__form__btn'
                     )}
                 >
-                    {isLogin ? 'Login' : 'Sign Up'}
+                    {isLogin
+                        ? authLanguageObj.login[language]
+                        : authLanguageObj.signUp[language]}
                 </button>
             </form>
         </div>

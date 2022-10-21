@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import UserResult from '../../userResult'
 import { isClassNameActive } from '../../../utils/functions'
 import { shuffleArray } from '../../../utils/functions'
+import { findOutLanguageObj } from '../../../utils/languageObj'
 
 const checkStrings = (firstStr, secondStr) => {
     const pureFirstStr = firstStr.trim().toLowerCase()
@@ -22,7 +23,7 @@ const inputBooleanClass = (condition) => {
         : `${inputClassName} ${inputClassName}_false`
 }
 
-const FindOut = ({ words }) => {
+const FindOut = ({ words, language }) => {
     const [previousWord, setPreviousWord] = useState('')
     const [unknownWords, setUnknownWords] = useState([])
     const [isTrue, setIsTrue] = useState(null)
@@ -78,6 +79,7 @@ const FindOut = ({ words }) => {
             onRestart={onRestart}
             unknownWordsArray={unknownWords}
             data={state}
+            language={language}
         />
     ) : (
         <main className='find-out'>
@@ -113,12 +115,13 @@ const FindOut = ({ words }) => {
                             'find-out__container__wrapper__idk'
                         )}
                     >
-                        idk
+                        {findOutLanguageObj.idk[language]}
                     </div>
                     <input
                         onChange={(e) => onInputChange(e)}
                         className={inputBooleanClass(isTrue)}
                         type='text'
+                        placeholder={findOutLanguageObj.word[language]}
                         value={inputValue}
                     />
                     <img
@@ -147,7 +150,7 @@ const FindOut = ({ words }) => {
                             isTrue === null,
                             'find-out__container__wrapper__prev-word'
                         )}
-                    >{`Previously written: ${previousWord}`}</div>
+                    >{`${findOutLanguageObj.prevWritten[language]}: ${previousWord}`}</div>
                 </div>
             </div>
         </main>

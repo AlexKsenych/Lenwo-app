@@ -3,7 +3,7 @@ import FlashcardsItem from './flashcardsItem'
 import UserResult from '../../userResult'
 import { useEffect, useState } from 'react'
 
-const Flashcards = ({ words }) => {
+const Flashcards = ({ words, language }) => {
     const [state, setState] = useState([])
     const [currentNum, setCurrentNum] = useState(0)
     const [unknownWords, setUnknownWords] = useState([])
@@ -28,6 +28,7 @@ const Flashcards = ({ words }) => {
         onNextClick,
         currentNum,
         dataLength: state.length,
+        language,
     }
 
     const isDone = currentNum === state.length && state.length !== 0
@@ -37,6 +38,7 @@ const Flashcards = ({ words }) => {
             onRestart={onRestart}
             unknownWordsArray={unknownWords}
             data={state}
+            language={language}
         />
     ) : (
         <main className='flashcards'>

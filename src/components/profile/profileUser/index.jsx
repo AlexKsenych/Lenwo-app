@@ -1,8 +1,9 @@
 import React from 'react'
 import imgNotFound from '../../../assets/img/image-not-found.png'
 import { isClassNameActive } from '../../../utils/functions'
+import { profileLanguageObj } from '../../../utils/languageObj'
 
-const ProfileUser = ({ data, setsLength }) => {
+const ProfileUser = ({ data, setsLength, language }) => {
     const { fullName, img } = data
 
     return (
@@ -18,7 +19,7 @@ const ProfileUser = ({ data, setsLength }) => {
             <div className='profile__user__name'>{fullName}</div>
             <div className='profile__user__descr'>
                 <div className='profile__user__descr__title'>
-                    Number of sets :
+                    {`${profileLanguageObj.numberOfSets[language]} :`}
                 </div>
                 <div className='profile__user__descr__value'>{setsLength}</div>
             </div>

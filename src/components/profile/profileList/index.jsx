@@ -4,8 +4,9 @@ import plus from '../../../assets/img/plus.png'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { deleteWordSet } from '../../../service/service'
+import { profileLanguageObj } from '../../../utils/languageObj'
 
-const ProfileList = ({ data }) => {
+const ProfileList = ({ data, language }) => {
     const [isActive, setIsActive] = useState(false)
     const [activeId, setActiveId] = useState()
     const [matches, setMatches] = useState(
@@ -27,7 +28,11 @@ const ProfileList = ({ data }) => {
 
     const onDeleteWordSetClick = (e, id, title) => {
         e.stopPropagation()
-        if (!window.confirm(`Do you want to delete this word set ${title} ?`))
+        if (
+            !window.confirm(
+                `${profileLanguageObj.deleteSetAlert[language]} ${title} ?`
+            )
+        )
             return
 
         deleteWordSet(id)
@@ -37,8 +42,8 @@ const ProfileList = ({ data }) => {
         const { title, id, words } = item
 
         const descrWords = matches
-            ? `${words.length} words in total`
-            : `${words[0].name}, ${words[1].name}, ${words[2].name}... / ${words.length} words in total`
+            ? `${words.length} ${profileLanguageObj.wordsInTotal[language]}`
+            : `${words[0].name}, ${words[1].name}, ${words[2].name}... / ${words.length} ${profileLanguageObj.wordsInTotal[language]}`
 
         const onItemClick = () => {
             setIsActive(!isActive)
@@ -96,19 +101,19 @@ const ProfileList = ({ data }) => {
                         to={`/template/flashcards${idParams}`}
                         className='profile__list__item__templates__template'
                     >
-                        Classic Flashcards
+                        {profileLanguageObj.classicFlashcards[language]}
                     </Link>
                     <Link
                         to={`/template/findOut${idParams}`}
                         className='profile__list__item__templates__template'
                     >
-                        Find out a word
+                        {profileLanguageObj.findOut[language]}
                     </Link>
                     <Link
                         to={`/template/kahoot-like${idParams}`}
                         className='profile__list__item__templates__template'
                     >
-                        Kahoot-like
+                        {profileLanguageObj.kahootlike[language]}
                     </Link>
                 </div>
             </div>

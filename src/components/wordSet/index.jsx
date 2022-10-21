@@ -5,6 +5,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import WordSetList from './wordSetList'
 import { postWordSet, updateWordSet } from '../../service/service'
 import { wordSetValidation } from '../../utils/validations'
+import { wordSetLanguageObj } from '../../utils/languageObj'
 
 const initialState = {
     title: '',
@@ -32,7 +33,7 @@ const initialState = {
     ],
 }
 
-const WordSet = ({ setIsAuth, data }) => {
+const WordSet = ({ setIsAuth, data, language }) => {
     const [activeWordId, setActiveWordId] = useState(null)
     const [state, setState] = useState(initialState)
     const [isCreate, setIsCreate] = useState(false)
@@ -160,13 +161,14 @@ const WordSet = ({ setIsAuth, data }) => {
         onWordAcceptClick,
         onWordDeleteClick,
         error,
+        language,
     }
 
     return (
         <div className='word-set'>
             <input
                 className='word-set__title'
-                placeholder='Enter word set title'
+                placeholder={wordSetLanguageObj.enterTitle[language]}
                 onChange={onTitleInputChange}
                 value={state.title}
             />
@@ -178,7 +180,7 @@ const WordSet = ({ setIsAuth, data }) => {
                     onClick={onAddWordClick}
                     className='word-set__btns__btn'
                 >
-                    Add word
+                    {wordSetLanguageObj.addWord[language]}
                 </button>
                 <button
                     onClick={onCreateWordSetClick}
@@ -188,7 +190,7 @@ const WordSet = ({ setIsAuth, data }) => {
                             : 'word-set__btns__btn word-set__btns__btn_inactive'
                     }
                 >
-                    Create word set
+                    {wordSetLanguageObj.createWordSet[language]}
                 </button>
             </div>
         </div>

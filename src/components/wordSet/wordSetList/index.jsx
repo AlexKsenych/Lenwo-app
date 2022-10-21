@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import line from '../../../assets/img/line.svg'
 import { isClassNameActive } from '../../../utils/functions'
+import { wordSetLanguageObj } from '../../../utils/languageObj'
 
 const WordSetList = ({
     data = [],
@@ -10,6 +11,7 @@ const WordSetList = ({
     onWordAcceptClick,
     onWordDeleteClick,
     error,
+    language,
 }) => {
     const [currentNameValue, setCurrentNameValue] = useState('')
     const [currentDescrValue, setCurrentDescrValue] = useState('')
@@ -61,7 +63,7 @@ const WordSetList = ({
                         </>
                     ) : (
                         <div className='word-set__words__word__overview__create-word'>
-                            Create word
+                            {wordSetLanguageObj.createWord[language]}
                         </div>
                     )}
                 </div>
@@ -69,13 +71,13 @@ const WordSetList = ({
                     <input
                         className='word-set__words__word__edit__name'
                         type='text'
-                        placeholder='Enter a name'
+                        placeholder={wordSetLanguageObj.enterName[language]}
                         onChange={onInputChange}
                         defaultValue={name}
                     />
                     <textarea
                         className='word-set__words__word__edit__descr'
-                        placeholder='Enter a description'
+                        placeholder={wordSetLanguageObj.enterDescr[language]}
                         onChange={onDescrChange}
                         defaultValue={descr}
                     />
@@ -96,13 +98,13 @@ const WordSetList = ({
                             }
                             className='word-set__words__word__edit__btns__btn'
                         >
-                            Accept
+                            {wordSetLanguageObj.accept[language]}
                         </button>
                         <button
                             onClick={() => onWordDeleteClick(id)}
                             className='word-set__words__word__edit__btns__btn'
                         >
-                            Delete
+                            {wordSetLanguageObj.delete[language]}
                         </button>
                     </div>
                 </div>

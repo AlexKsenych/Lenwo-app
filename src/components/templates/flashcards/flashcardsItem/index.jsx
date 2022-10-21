@@ -1,7 +1,14 @@
 import { useState } from 'react'
 import { isClassNameActive } from '../../../../utils/functions'
+import { flashcardsLanguageObj } from '../../../../utils/languageObj'
 
-const FlashcardsItem = ({ data = {}, onNextClick, currentNum, dataLength }) => {
+const FlashcardsItem = ({
+    data = {},
+    onNextClick,
+    currentNum,
+    dataLength,
+    language,
+}) => {
     const [isActiveClass, setIsActiveClass] = useState(false)
     const { name, descr } = data
     const img = null
@@ -28,13 +35,13 @@ const FlashcardsItem = ({ data = {}, onNextClick, currentNum, dataLength }) => {
                             onClick={(e) => onNextClick(e, data)}
                             className='flashcards__flashcard__inner__front__btns__btn'
                         >
-                            idk
+                            {flashcardsLanguageObj.idk[language]}
                         </button>
                         <button
                             onClick={onNextClick}
                             className='flashcards__flashcard__inner__front__btns__btn'
                         >
-                            Yeah I Knew That
+                            {flashcardsLanguageObj.know[language]}
                         </button>
                     </div>
                 </div>

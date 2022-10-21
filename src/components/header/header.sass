@@ -8,7 +8,7 @@
     position: relative
     &__title
         padding-top: 3px
-        width: 80px
+        width: auto
         height: 100%
         text-align: center
         font-size: 24px
@@ -19,6 +19,31 @@
         pointer-events: none
         &_active
             pointer-events: auto
+    &__language
+        width: 70px
+        height: 100%
+        display: flex
+        justify-content: space-between
+        align-items: center
+        position: absolute
+        top: 0
+        right: 150px
+        &__btn
+            background: none
+            border: none
+            font-size: 18px
+            color: #fff
+            transition: 0.3s
+            cursor: pointer
+            &_active
+                font-weight: bold
+            &:hover
+                padding-bottom: 4px
+        &__line
+            width: 1px
+            height: 25px
+            border-right: 2px solid #fff
+            transform: skew(20deg)
     &__logout
         display: none
         width: 70px

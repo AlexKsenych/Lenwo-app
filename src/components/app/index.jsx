@@ -14,6 +14,15 @@ import TemplateHOC from './templateHOC'
 const App = () => {
     const [isAuth, setIsAuth] = useState(null)
     const [userData, setUserData] = useState({})
+    const [language, setLanguage] = useState('EN')
+
+    useEffect(() => {
+        if (!window.localStorage.getItem('language')) {
+            window.localStorage.setItem('language', 'EN')
+        } else {
+            setLanguage(window.localStorage.getItem('language'))
+        }
+    }, [])
 
     useEffect(() => {
         getMe()
@@ -33,9 +42,14 @@ const App = () => {
 
     return (
         <div className='app'>
-            <Header auth={authCondition} setIsAuth={setIsAuth} />
+            <Header
+                auth={authCondition}
+                setIsAuth={setIsAuth}
+                language={language}
+                setLanguage={setLanguage}
+            />
             {authCondition ? (
-                <Auth setIsAuth={setIsAuth} />
+                <Auth setIsAuth={setIsAuth} language={language} />
             ) : (
                 <Routes>
                     <Route
@@ -44,6 +58,7 @@ const App = () => {
                             <Profile
                                 data={userData.wordSets}
                                 userData={userData}
+                                language={language}
                             />
                         }
                     />
@@ -53,6 +68,7 @@ const App = () => {
                             <WordSet
                                 setIsAuth={setIsAuth}
                                 data={userData.wordSets}
+                                language={language}
                             />
                         }
                     />
@@ -62,6 +78,7 @@ const App = () => {
                             <TemplateHOC
                                 Component={Flashcards}
                                 data={userData.wordSets}
+                                language={language}
                             />
                         }
                     />
@@ -71,6 +88,7 @@ const App = () => {
                             <TemplateHOC
                                 Component={FindOut}
                                 data={userData.wordSets}
+                                language={language}
                             />
                         }
                     />
@@ -80,6 +98,7 @@ const App = () => {
                             <TemplateHOC
                                 Component={KahootLike}
                                 data={userData.wordSets}
+                                language={language}
                             />
                         }
                     />

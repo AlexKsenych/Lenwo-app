@@ -19,7 +19,7 @@ const createRandomNumbers = (arrLength, currNum) => {
         .slice(0, 3)
 }
 
-const KahootLike = ({ words }) => {
+const KahootLike = ({ words, language }) => {
     const [state, setState] = useState([])
     const [wordNums, setWordNums] = useState([])
     const [currentNum, setCurrentNum] = useState(0)
@@ -83,6 +83,7 @@ const KahootLike = ({ words }) => {
             onRestart={onRestart}
             unknownWordsArray={unknownWords}
             data={words}
+            language={language}
         />
     ) : (
         <main className='kahoot-like'>
