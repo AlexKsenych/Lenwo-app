@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'http://localhost:2121'
+const URL = 'https://lenwo-backend.herokuapp.com/'
 
 const instance = axios.create({
     baseURL: URL,
