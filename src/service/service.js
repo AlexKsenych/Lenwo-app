@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'https://lenwo-backend.herokuapp.com/'
+const URL = 'http://localhost:2121'
 
 const instance = axios.create({
     baseURL: URL,
@@ -29,16 +29,28 @@ export const getMe = async () => {
 }
 
 export const postWordSet = async (wordSet) => {
-    const res = await instance.post('/word-set', wordSet)
+    const res = await instance.post('/word-set', wordSet, {
+        headers: {
+            Authorization: window.localStorage.getItem('token'),
+        },
+    })
     return await res.data
 }
 
 export const updateWordSet = async (id, wordSet) => {
-    const res = await instance.post(`/word-set/${id}`, wordSet)
+    const res = await instance.post(`/word-set/${id}`, wordSet, {
+        headers: {
+            Authorization: window.localStorage.getItem('token'),
+        },
+    })
     return await res.data
 }
 
 export const deleteWordSet = async (id) => {
-    const res = await instance.delete(`/word-set/${id}`)
+    const res = await instance.delete(`/word-set/${id}`, {
+        headers: {
+            Authorization: window.localStorage.getItem('token'),
+        },
+    })
     return await res.data
 }
