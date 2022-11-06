@@ -124,7 +124,9 @@ const FindOut = ({ words }) => {
                         onChange={(e) => onInputChange(e)}
                         className={inputBooleanClass(isTrue)}
                         type='text'
-                        placeholder={findOutLanguageObj.word[language]}
+                        placeholder={
+                            !isTrue ? findOutLanguageObj.word[language] : null
+                        }
                         value={inputValue}
                     />
                     <img
