@@ -24,6 +24,7 @@ const KahootLike = ({ words, language }) => {
     const [wordNums, setWordNums] = useState([])
     const [currentNum, setCurrentNum] = useState(0)
     const [unknownWords, setUnknownWords] = useState([])
+    const [isBtnsDisabled, setIsBtnsDisabled] = useState(false)
 
     const img = null
 
@@ -39,6 +40,7 @@ const KahootLike = ({ words, language }) => {
     }, [])
 
     const onNextClick = (wordId, e) => {
+        isBtnsDisabled(true)
         const condition = wordId === state[currentNum].id
         const timeOut = condition ? 700 : 1500
 
@@ -59,7 +61,9 @@ const KahootLike = ({ words, language }) => {
                     ...createRandomNumbers(words.length, currentNum + 1),
                 ])
             )
+
             setCurrentNum(currentNum + 1)
+            isBtnsDisabled(false)
         }, timeOut)
     }
 
@@ -107,24 +111,28 @@ const KahootLike = ({ words, language }) => {
                     <button
                         onClick={(e) => onNextClick(state[wordNums[0]].id, e)}
                         className='kahoot-like__container__btns__btn'
+                        disabled={setIsBtnsDisabled}
                     >
                         {state[wordNums[0]].name}
                     </button>
                     <button
                         onClick={(e) => onNextClick(state[wordNums[1]].id, e)}
                         className='kahoot-like__container__btns__btn'
+                        disabled={setIsBtnsDisabled}
                     >
                         {state[wordNums[1]].name}
                     </button>
                     <button
                         onClick={(e) => onNextClick(state[wordNums[2]].id, e)}
                         className='kahoot-like__container__btns__btn'
+                        disabled={setIsBtnsDisabled}
                     >
                         {state[wordNums[2]].name}
                     </button>
                     <button
                         onClick={(e) => onNextClick(state[wordNums[3]].id, e)}
                         className='kahoot-like__container__btns__btn'
+                        disabled={setIsBtnsDisabled}
                     >
                         {state[wordNums[3]].name}
                     </button>
