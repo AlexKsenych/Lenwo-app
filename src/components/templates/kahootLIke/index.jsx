@@ -40,7 +40,7 @@ const KahootLike = ({ words, language }) => {
     }, [])
 
     const onNextClick = (wordId, e) => {
-        isBtnsDisabled(true)
+        setIsBtnsDisabled(true)
         const condition = wordId === state[currentNum].id
         const timeOut = condition ? 700 : 1500
 
@@ -63,7 +63,7 @@ const KahootLike = ({ words, language }) => {
             )
 
             setCurrentNum(currentNum + 1)
-            isBtnsDisabled(false)
+            setIsBtnsDisabled(false)
         }, timeOut)
     }
 
@@ -111,28 +111,28 @@ const KahootLike = ({ words, language }) => {
                     <button
                         onClick={(e) => onNextClick(state[wordNums[0]].id, e)}
                         className='kahoot-like__container__btns__btn'
-                        disabled={setIsBtnsDisabled}
+                        disabled={isBtnsDisabled}
                     >
                         {state[wordNums[0]].name}
                     </button>
                     <button
                         onClick={(e) => onNextClick(state[wordNums[1]].id, e)}
                         className='kahoot-like__container__btns__btn'
-                        disabled={setIsBtnsDisabled}
+                        disabled={isBtnsDisabled}
                     >
                         {state[wordNums[1]].name}
                     </button>
                     <button
                         onClick={(e) => onNextClick(state[wordNums[2]].id, e)}
                         className='kahoot-like__container__btns__btn'
-                        disabled={setIsBtnsDisabled}
+                        disabled={isBtnsDisabled}
                     >
                         {state[wordNums[2]].name}
                     </button>
                     <button
                         onClick={(e) => onNextClick(state[wordNums[3]].id, e)}
                         className='kahoot-like__container__btns__btn'
-                        disabled={setIsBtnsDisabled}
+                        disabled={isBtnsDisabled}
                     >
                         {state[wordNums[3]].name}
                     </button>
